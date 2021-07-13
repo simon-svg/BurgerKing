@@ -35,7 +35,6 @@
             <div class="sidebar-header">
                 <h3>Admin Panel</h3>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
                     <a class="admin__item" data-php="" href="#">Header Menu lists</a>
@@ -62,6 +61,9 @@
                 </li>
             </ul>
         </nav>
+
+<!-- ---------------------------------- HEADER MENUE LIST ----------------------------------------------- -->
+
         <div class="admin__section admin__section_header-list">
             <div class="admin__section_head">
                 <h3 class="admin__section_title">header menu list</h3>
@@ -70,6 +72,9 @@
                 header List
             </div>
         </div>
+
+<!-- ---------------------------------- CHEFS ----------------------------------------------- -->
+
         <div class="admin__section admin__section_header-list admin__section-none">
             <div class="admin__section_head">
                 <h3 class="admin__section_title">Chefs</h3>
@@ -126,6 +131,9 @@
                 </form>
             </div>
         </div>
+
+<!-- ---------------------------------- BURGERS ----------------------------------------------- -->
+
         <div class="admin__section admin__section_header-list admin__section-none">
             <div class="admin__section_head">
                 <h3 class="admin__section_title">Burgers</h3>
@@ -194,22 +202,178 @@
                 </div>
             </div>
         </div>
+
+<!-- ---------------------------------- SNACKS ----------------------------------------------- -->
+
         <div class="admin__section admin__section_header-list admin__section-none">
             <div class="admin__section_head">
                 <h3 class="admin__section_title">Snacks</h3>
             </div>
             <div class="admin__section_content">
-                Snacks
+                <div class="admin__section_content">
+                    <div class="admin__burgers">
+                        <table class="admin__table">
+                            <tr>
+                                <th class="admin__table_title">name</th>
+                                <th class="admin__table_title">info</th>
+                                <th class="admin__table_title">img</th>
+                                <th class="admin__table_title">price</th>
+                                <th class="admin__table_title">discPrice</th>
+                                <th class="admin__table_title">date</th>
+                            </tr>
+                            <?php
+                            $query = "SELECT * FROM snacks";
+                            $result = mysqli_query($mysqli, $query);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                <tr class="admin__section_item">
+                                    <td class="admin__section_item_td">
+                                        <h3 class="admin__section_item_name">
+                                            <?php echo $row['name'] ?></h3>
+                                    </td>
+                                    <td class="admin__section_item_td">
+                                        <?php echo $row['info'] ?></h3>
+                                    </td>
+                                    <td class="admin__section_item_td">
+                                        <div class="admin__section_img">
+                                            <img src="../../img/snacks/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
+                                        </div>
+                                    </td>
+                                    <td class="admin__section_item_td">
+                                        <?php echo $row['price'] ?></h3>
+                                    </td>
+                                    <td class="admin__section_item_td">
+                                        <?php echo $row['discPrice'] ? $row['discPrice'] : "no discount price" ?></h3>
+                                    </td>
+                                    <td class="admin__section_item_td">
+                                        <a href="?id=<?php echo $row["id"] ?>&img=<?php echo $row['img'] ?>">
+                                            <i class="example__class admin__icon fas fa-pencil-alt"></i>
+                                        </a>
+                                        <a href="./burgers/remove.php?id=<?php echo $row["id"] ?>">
+                                            <i class="admin__icon fas fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </table>
+                    </div>
+                    <?php
+                    $id = '';
+                    $name = '';
+                    $info = '';
+                    $img = '';
+                    $price = '';
+                    $discPrice = '';
+
+                    if(isset($_GET["id"])){
+                        $query = 'SELECT * FROM snacks WHERE id = ' . $_GET["id"];
+                        $result = mysqli_query($mysqli, $query);
+
+                        $row = mysqli_fetch_assoc($result);
+                        $id = $row["id"];
+                        $name = $row["name"];
+                        $info = $row["info"];
+                        $img = $row["img"];
+                        $price = $row["price"];
+                        $discPrice = $row["discPrice"];
+                    }
+                    ?>
+                    <form class="admin__form" action="<?php if($_GET['id']){echo './snacks/update.php';}else{echo './snacks/insert.php';} ?>" method="POST" enctype="multipart/form-data">
+                        <div class="form__flex">
+                            <input class="admin__inp admin__inp_food form-control" type="text" name="name" placeholder="Name" required
+                            value="<?php echo $name ?>">
+
+                            <textarea class="admin__inp admin__inp_food form-control" name="info" placeholder="Info">
+                                <?php echo $info ?>
+                            </textarea>
+
+                            <input class="admin__inp admin__inp_food form-control" type="file" name="img" <?php if(!$_GET["id"]){echo "required";} ?>>
+                            <input class="admin__inp admin__inp_food form-control" type="number" name="price" placeholder="Price" required
+                            value="<?php echo $price ?>">
+
+                            <input class="admin__inp admin__inp_food form-control" type="number" name="discPrice" placeholder="Discount Price"
+                            value="<?php echo $discPrice ?>">
+                        </div>
+                        <div>
+                            <button class="btn custom-btn admin__form_btn">Add snack</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
+<!-- ---------------------------------- BEVERAGES ----------------------------------------------- -->
+
         <div class="admin__section admin__section_header-list admin__section-none">
             <div class="admin__section_head">
                 <h3 class="admin__section_title">Beverages</h3>
             </div>
             <div class="admin__section_content">
-                Beverages
+                <div class="admin__beverages">
+                    <table class="admin__table">
+                        <tr>
+                            <th class="admin__table_title">name</th>
+                            <th class="admin__table_title">info</th>
+                            <th class="admin__table_title">img</th>
+                            <th class="admin__table_title">price</th>
+                            <th class="admin__table_title">discPrice</th>
+                            <th class="admin__table_title">date</th>
+                        </tr>
+                        <?php
+                        $query = "SELECT * FROM beverages";
+                        $result = mysqli_query($mysqli, $query);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                            <tr class="admin__section_item">
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_name">
+                                        <?php echo $row['name'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <?php echo $row['info'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <div class="admin__section_img">
+                                        <img src="../../img/beverages/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
+                                    </div>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <?php echo $row['price'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <?php echo $row['discPrice'] ? $row['discPrice'] : "no discount price" ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <a href="./beverages/updateIndex.php?id=<?php echo $row["id"] ?>&name=<?php echo $row["name"] ?>&info=<?php echo $row["info"] ?>&img=<?php echo $row["img"] ?>&price=<?php echo $row["price"] ?>&discPrice=<?php echo $row["discPrice"] ?>">
+                                        <i class="example__class admin__icon fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="./beverages/remove.php?id=<?php echo $row["id"] ?>">
+                                        <i class="admin__icon fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+                <form class="admin__form" action="./beverages/insert.php" method="POST" enctype="multipart/form-data">
+                    <div class="form__flex">
+                        <input class="admin__inp admin__inp_food form-control" type="text" name="name" placeholder="Name" required>
+                        <textarea class="admin__inp admin__inp_food form-control" name="info" placeholder="Info"></textarea>
+                        <input class="admin__inp admin__inp_food form-control" type="file" name="img" required>
+                        <input class="admin__inp admin__inp_food form-control" type="number" name="price" placeholder="Price" required>
+                        <input class="admin__inp admin__inp_food form-control" type="number" name="discPrice" placeholder="Discount Price">
+                    </div>
+                    <div>
+                        <button class="btn custom-btn admin__form_btn">Add Beverages</button>
+                    </div>
+                </form>
             </div>
         </div>
+
+<!-- ---------------------------------- CONTACTS ----------------------------------------------- -->
+
         <div class="admin__section admin__section_header-list admin__section-none">
             <div class="admin__section_head">
                 <h3 class="admin__section_title">Contacts</h3>

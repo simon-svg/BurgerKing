@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 12 2021 г., 14:41
+-- Время создания: Июл 13 2021 г., 12:49
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.1.22
 
@@ -21,6 +21,33 @@ SET time_zone = "+00:00";
 --
 -- База данных: `burgerking`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `beverages`
+--
+
+CREATE TABLE `beverages` (
+  `id` int(16) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `info` text NOT NULL,
+  `img` varchar(128) NOT NULL,
+  `price` varchar(16) NOT NULL,
+  `discPrice` varchar(16) NOT NULL,
+  `date` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `beverages`
+--
+
+INSERT INTO `beverages` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `date`) VALUES
+(1, 'Single Cup Brew', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '5376851.jpeg', '7.00', '', 1626159954),
+(2, 'Caffe Americano', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '66907920.jpeg', '9.00', '', 1626159994),
+(3, 'Caramel Macchiato', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '70096016.jpeg', '15.00', '', 1626160022),
+(4, 'Standard black coffee', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '93807800.jpeg', '8.00', '', 1626160047),
+(5, 'Standard black coffee', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '23695148.jpeg', '12.00', '', 1626160072);
 
 -- --------------------------------------------------------
 
@@ -115,7 +142,33 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `message`) VALUES
-(2, 'simon', 'simonkarapetyan605@gmail.com', 'test subject', 'one big text');
+(2, 'simon', 'simonkarapetyan605@gmail.com', 'test subject', 'one very big text');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `snacks`
+--
+
+CREATE TABLE `snacks` (
+  `id` int(16) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `info` text NOT NULL,
+  `img` varchar(256) NOT NULL,
+  `price` varchar(16) NOT NULL,
+  `discPrice` varchar(16) DEFAULT NULL,
+  `date` int(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `snacks`
+--
+
+INSERT INTO `snacks` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `date`) VALUES
+(1, 'Corn Tikki - Spicy fried Aloo', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '36144444.jpeg', '15.00', '', 1626156691),
+(2, 'Bread besan Toast', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '57608142.jpeg', '35.00', '', 1626156782),
+(3, 'Healthy soya nugget snacks', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '10730436.jpeg', '20.00', '', 1626156814),
+(4, 'Tandoori Soya Chunks', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '23346113.jpeg', '30.00', '', 1626156836);
 
 -- --------------------------------------------------------
 
@@ -144,6 +197,12 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `login`, `password`) VA
 --
 
 --
+-- Индексы таблицы `beverages`
+--
+ALTER TABLE `beverages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `burgers`
 --
 ALTER TABLE `burgers`
@@ -168,6 +227,12 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `snacks`
+--
+ALTER TABLE `snacks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -178,10 +243,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `beverages`
+--
+ALTER TABLE `beverages`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT для таблицы `burgers`
 --
 ALTER TABLE `burgers`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `chefs`
@@ -200,6 +271,12 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `contact`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `snacks`
+--
+ALTER TABLE `snacks`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
