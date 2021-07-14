@@ -30,30 +30,4 @@ document.querySelectorAll("#pageSubmenu").forEach((item) => {
     item.addEventListener("click", (e) => {
         e.stopPropagation();
     })
-})
-
-
-
-
-
-
-
-
-
-// admin item
-const adminItems = document.querySelectorAll(".admin__item");
-const adminSection = document.querySelectorAll(".admin__section");
-const adminItemsl = adminItems.length;
-
-adminItems.forEach((item, i) => {
-    item.addEventListener("click", () => {
-        for(let j = 0; j < adminItemsl; j++){
-            if(i == j){
-                adminSection[j].classList.remove("admin__section-none");
-            }
-            else{
-                adminSection[j].classList.add("admin__section-none");
-            }
-        }
-    })
-})
+});

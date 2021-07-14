@@ -2,10 +2,12 @@
 
 require_once "../../db.php";
 
-$id = $_GET["id"];
+$name = $_POST["name"];
 
-$query = "DELETE FROM all_foods WHERE id='$id'";
+$query = "INSERT INTO food_categories (name) VALUES ('$name')";
+
 $result = mysqli_query($mysqli, $query);
+
 
 if(!$result){
     echo mysqli_error($mysqli);

@@ -2,8 +2,9 @@
 
 require_once "../../db.php";
 
-$name = $_POST["name"] ? $_POST["name"] :  $_GET["name"];
-$position = $_POST["position"] ? $_POST["position"] : $_GET["position"];
+$name = $_POST["name"];
+$position = $_POST["position"];
+$img = $_POST["img"];
 $id = $_GET["id"];
 
 foreach ($_FILES as $key => $file) {
@@ -20,7 +21,6 @@ foreach ($_FILES as $key => $file) {
     }
 }
 
-$img = $img ? $img : $_GET["img"];
 
 $query = "UPDATE chefs SET name='$name', position='$position', img='$img' WHERE id='$id'";
 

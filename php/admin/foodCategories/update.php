@@ -3,16 +3,9 @@
 require_once "../../db.php";
 
 $name = $_POST["name"];
-$email = $_POST["email"];
-$subject = $_POST["subject"];
-$message = $_POST["message"];
 $id = $_GET["id"];
 
-
-
-
-$query = "UPDATE contact SET name='$name', email='$email', subject='$subject', message='$message' WHERE id='$id'";
-
+$query = "UPDATE food_categories SET name='$name' WHERE id='$id'";
 
 $result = mysqli_query($mysqli, $query);
 

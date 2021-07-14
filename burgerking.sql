@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 13 2021 г., 12:49
+-- Время создания: Июл 14 2021 г., 14:14
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.1.22
 
@@ -25,56 +25,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `beverages`
+-- Структура таблицы `all_foods`
 --
 
-CREATE TABLE `beverages` (
+CREATE TABLE `all_foods` (
   `id` int(16) NOT NULL,
-  `name` varchar(256) NOT NULL,
+  `name` varchar(128) NOT NULL,
   `info` text NOT NULL,
   `img` varchar(128) NOT NULL,
   `price` varchar(16) NOT NULL,
   `discPrice` varchar(16) NOT NULL,
-  `date` int(16) NOT NULL
+  `categories_id` int(16) NOT NULL,
+  `date` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `beverages`
+-- Дамп данных таблицы `all_foods`
 --
 
-INSERT INTO `beverages` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `date`) VALUES
-(1, 'Single Cup Brew', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '5376851.jpeg', '7.00', '', 1626159954),
-(2, 'Caffe Americano', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '66907920.jpeg', '9.00', '', 1626159994),
-(3, 'Caramel Macchiato', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '70096016.jpeg', '15.00', '', 1626160022),
-(4, 'Standard black coffee', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '93807800.jpeg', '8.00', '', 1626160047),
-(5, 'Standard black coffee', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '23695148.jpeg', '12.00', '', 1626160072);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `burgers`
---
-
-CREATE TABLE `burgers` (
-  `id` int(16) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `info` text NOT NULL,
-  `img` varchar(256) NOT NULL,
-  `price` varchar(16) NOT NULL,
-  `discPrice` varchar(16) NOT NULL,
-  `date` int(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `burgers`
---
-
-INSERT INTO `burgers` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `date`) VALUES
-(1, 'Mini cheese Burger', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '64049833.jpeg', '9.00', '', 1626087560),
-(2, 'Double size burger', 'sit amet elit. Phasel nec preti facilLorem ipsum dolor ', '31819378.jpeg', '11.00', '', 1626087627),
-(3, 'Bacon, EGG and Cheese', 'ipsum Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '35875879.jpeg', '13.00', '', 1626087961),
-(4, 'Pulled porx Burger', 'elit ydolor sit amet elit. Phasel nec preti facil', '69270511.jpeg', '18.00', '', 1626087985),
-(5, 'Fried chicken Burger', 'facil ipsum dolor sit amet elit. Phasel nec preti facil', '46218204.jpeg', '22.00', '', 1626088015);
+INSERT INTO `all_foods` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `categories_id`, `date`) VALUES
+(1, 'Mini cheese Burger', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '64049833.jpeg', '9.00', '', 1, 1626087560),
+(2, 'Double size burger', 'sit amet elit. Phasel nec preti facilLorem ipsum dolor ', '31819378.jpeg', '11.00', '', 1, 1626087627),
+(3, 'Bacon, EGG and Cheese', 'ipsum Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '35875879.jpeg', '13.00', '', 1, 1626087961),
+(4, 'Pulled porx Burger', 'elit ydolor sit amet elit. Phasel nec preti facil', '69270511.jpeg', '18.00', '', 1, 1626087985),
+(5, 'Fried chicken Burger', 'facil ipsum dolor sit amet elit. Phasel nec preti facil', '46218204.jpeg', '22.00', '', 1, 1626256907),
+(6, 'Corn Tikki - Spicy fried Aloo', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '36144444.jpeg', '15.00', '', 2, 1626256896),
+(7, 'Bread besan Toast', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '57608142.jpeg', '35.00', '', 2, 1626256889),
+(8, 'Healthy soya nugget snacks', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '10730436.jpeg', '20.00', '', 2, 1626256880),
+(9, 'Tandoori Soya Chunks', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '23346113.jpeg', '30.00', '', 2, 1626256871),
+(10, 'Single Cup Brew', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '5376851.jpeg', '7.00', '', 3, 1626256821),
+(11, 'Caffe Americano', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '66907920.jpeg', '9.00', '', 3, 1626256832),
+(12, 'Caramel Macchiato', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '70096016.jpeg', '15.00', '', 3, 1626256842),
+(13, 'Standard black coffee', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '93807800.jpeg', '8.00', '', 3, 1626256850),
+(14, 'Standard black coffee', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '23695148.jpeg', '12.00', '', 3, 1626258115);
 
 -- --------------------------------------------------------
 
@@ -147,28 +130,23 @@ INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `snacks`
+-- Структура таблицы `food_categories`
 --
 
-CREATE TABLE `snacks` (
+CREATE TABLE `food_categories` (
   `id` int(16) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `info` text NOT NULL,
-  `img` varchar(256) NOT NULL,
-  `price` varchar(16) NOT NULL,
-  `discPrice` varchar(16) DEFAULT NULL,
-  `date` int(128) NOT NULL
+  `name` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `snacks`
+-- Дамп данных таблицы `food_categories`
 --
 
-INSERT INTO `snacks` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `date`) VALUES
-(1, 'Corn Tikki - Spicy fried Aloo', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '36144444.jpeg', '15.00', '', 1626156691),
-(2, 'Bread besan Toast', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '57608142.jpeg', '35.00', '', 1626156782),
-(3, 'Healthy soya nugget snacks', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '10730436.jpeg', '20.00', '', 1626156814),
-(4, 'Tandoori Soya Chunks', 'Lorem ipsum dolor sit amet elit. Phasel nec preti facil', '23346113.jpeg', '30.00', '', 1626156836);
+INSERT INTO `food_categories` (`id`, `name`) VALUES
+(1, 'burger'),
+(2, 'snack'),
+(3, 'beverage'),
+(6, 'simon');
 
 -- --------------------------------------------------------
 
@@ -197,15 +175,9 @@ INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `login`, `password`) VA
 --
 
 --
--- Индексы таблицы `beverages`
+-- Индексы таблицы `all_foods`
 --
-ALTER TABLE `beverages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `burgers`
---
-ALTER TABLE `burgers`
+ALTER TABLE `all_foods`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -227,9 +199,9 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `snacks`
+-- Индексы таблицы `food_categories`
 --
-ALTER TABLE `snacks`
+ALTER TABLE `food_categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -243,22 +215,16 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `beverages`
+-- AUTO_INCREMENT для таблицы `all_foods`
 --
-ALTER TABLE `beverages`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT для таблицы `burgers`
---
-ALTER TABLE `burgers`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `all_foods`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT для таблицы `chefs`
 --
 ALTER TABLE `chefs`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `clients`
@@ -270,13 +236,13 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT для таблицы `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT для таблицы `snacks`
+-- AUTO_INCREMENT для таблицы `food_categories`
 --
-ALTER TABLE `snacks`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `food_categories`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

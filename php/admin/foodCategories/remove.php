@@ -4,7 +4,7 @@ require_once "../../db.php";
 
 $id = $_GET["id"];
 
-$query = "DELETE FROM all_foods WHERE id='$id'";
+$query = "DELETE FROM food_categories WHERE id='$id'";
 $result = mysqli_query($mysqli, $query);
 
 if(!$result){

@@ -1125,6 +1125,9 @@ a:focus {
 .admin__inp_food{
     width: 18%;
 }
+#categoriesId{
+    height: max-content;
+}
 .admin__form_btn{
     margin-top: 20px;
 }
@@ -2085,7 +2088,6 @@ p {
 }
 .admin__section{
     width: calc(100% - 250px);
-    height: 100vh;
 }
 .admin__section_head{
     width: 100%;

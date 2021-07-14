@@ -37,13 +37,13 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a class="admin__item" href="#">Header Menu lists</a>
+                    <a class="admin__item" href="index.php">Header Menu lists</a>
                 </li>
                 <li>
                     <a class="admin__item" href="chefs.php">Chefs</a>
                 </li>
                 <li>
-                    <a class="admin__item" href="foodCategories.php">Food Categories</a>
+                    <a class="admin__item" href="#">Food Categories</a>
                 </li>
                 <li class="admin__item_drop">
                     <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle admin">Food</a>
@@ -72,10 +72,65 @@
 
         <div class="admin__section admin__section_header-list">
             <div class="admin__section_head">
-                <h3 class="admin__section_title">header menu list</h3>
+                <h3 class="admin__section_title">food categories</h3>
             </div>
             <div class="admin__section_content">
-                header List
+                <div class="admin__contact">
+                    <table class="admin__table">
+                        <tr>
+                            <th class="admin__table_title">name</th>
+                            <th class="admin__table_title">panel</th>
+                        </tr>
+                        <?php
+                        $query = "SELECT * FROM food_categories";
+                        $result = mysqli_query($mysqli, $query);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                            <tr class="admin__section_item">
+                                <td class="admin__section_item_td">
+                                    <div class="admin__section_img">
+                                        <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
+                                    </div>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <a href="?id=<?php echo $row["id"] ?>">
+                                        <i class="example__class admin__icon fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="./foodCategories/remove.php?id=<?php echo $row["id"] ?>">
+                                        <i class="admin__icon fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+                <?php
+
+                $id = '';
+                $name = '';
+
+                if(isset($_GET["id"])){
+                    $query = 'SELECT * FROM food_categories WHERE id = ' . $_GET["id"];
+                    $result = mysqli_query($mysqli, $query);
+
+                    $row = mysqli_fetch_assoc($result);
+                    $id = $row["id"];
+                    $name = $row["name"];
+                }
+
+                ?>
+                <form class="admin__form"
+                action="<?php if($_GET['id']){echo './foodCategories/update.php?id=' . $id;}else{echo './foodCategories/insert.php';}?>"
+                method="POST" enctype="multipart/form-data">
+                    <div class="form__flex">
+                        <input class="admin__inp admin__inp_header form-control" type="text" name="name"
+                        value="<?php echo $name ?>" placeholder="Name" required>
+                    </div>
+                    <div>
+                        <button class="btn custom-btn admin__form_btn">Add Food Categories</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

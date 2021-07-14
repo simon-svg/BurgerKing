@@ -2,12 +2,13 @@
 
 require_once "../../db.php";
 
-$id = $_GET["id"];
-$name = $_POST["name"] ? $_POST["name"] : $_GET["name"];
-$info = $_POST["info"] ? $_POST["info"] : $_GET["info"];
-$price = $_POST["price"] ? $_POST["price"] : $_GET["price"];
+$name = $_POST["name"];
+$info = $_POST["info"];
+$price = $_POST["price"];
 $discPrice = $_POST["discPrice"];
-$img = "";
+$categoriesId = $_POST["categoriesId"];
+$img = $_POST["img"];
+$id = $_GET["id"];
 $date = time();
 
 
@@ -18,17 +19,14 @@ foreach ($_FILES as $key => $file) {
         if (preg_match("/(png || jpg || jpeg)/", $x)) {
             $y = mt_rand(1000000, 99999999);
             $y .= '.' . $x;
-            if (move_uploaded_file($file["tmp_name"], "../../../img/burgers/" . $y)) {
+            if (move_uploaded_file($file["tmp_name"], "../../../img/foods/" . $y)) {
                 $img = $y;
             }
         }
     }
 }
 
-$img = $img ? $img : $_GET["img"];
-
-$query = "UPDATE burgers SET name='$name', info='$info', img='$img', price='$price', discPrice='$discPrice', date='$date' WHERE id='$id'";
-
+$query = "UPDATE all_foods SET name='$name', info='$info', img='$img', price='$price', discPrice='$discPrice', categories_id='$categoriesId', date='$date' WHERE id='$id'";
 
 $result = mysqli_query($mysqli, $query);
 
