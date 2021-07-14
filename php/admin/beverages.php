@@ -118,7 +118,7 @@
                                     <a href="?id=<?php echo $row["id"] ?>">
                                         <i class="example__class admin__icon fas fa-pencil-alt"></i>
                                     </a>
-                                    <a href="./beverages/remove.php?id=<?php echo $row["id"] ?>">
+                                    <a href="./allFoods/remove.php?id=<?php echo $row["id"] ?>">
                                         <i class="admin__icon fas fa-times"></i>
                                     </a>
                                 </td>
@@ -149,7 +149,7 @@
                     }
 
                     ?>
-                <form class="admin__form" action="<?php if($_GET['id']){echo './beverages/update.php?id='.$id;}else{echo './beverages/insert.php';}?>" method="POST" enctype="multipart/form-data">
+                <form class="admin__form" action="<?php if($_GET['id']){echo './allFoods/update.php?id='.$id;}else{echo './allFoods/insert.php';}?>" method="POST" enctype="multipart/form-data">
                     <div class="form__flex">
                         <input class="admin__inp admin__inp_food form-control" type="text" name="name"
                         value="<?php echo $name; ?>" placeholder="Name" required>
