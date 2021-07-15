@@ -19,7 +19,7 @@ foreach ($_FILES as $key => $file) {
         if (preg_match("/(png || jpg || jpeg)/", $x)) {
             $y = mt_rand(1000000, 99999999);
             $y .= '.' . $x;
-            if (move_uploaded_file($file["tmp_name"], "../../../img/burgers/" . $y)) {
+            if (move_uploaded_file($file["tmp_name"], "../../../img/foods/" . $y)) {
                 $img = $y;
             }
         }

@@ -78,6 +78,7 @@
                 <div class="admin__contact">
                     <table class="admin__table">
                         <tr>
+                            <th class="admin__table_title">id</th>
                             <th class="admin__table_title">name</th>
                             <th class="admin__table_title">panel</th>
                         </tr>
@@ -88,6 +89,11 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                             <tr class="admin__section_item">
+                                <td class="admin__section_item_td" style="width: 10%;">
+                                    <div class="admin__section_img">
+                                        <h3 class="admin__section_item_name"><?php echo $row['id'] ?></h3>
+                                    </div>
+                                </td>
                                 <td class="admin__section_item_td">
                                     <div class="admin__section_img">
                                         <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
