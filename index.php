@@ -108,10 +108,10 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="booking-form">
-                            <form>
+                            <form action="./php/booking.php" method="POST">
                                 <div class="control-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Name" required="required" />
+                                        <input type="text" class="form-control" name="name" placeholder="Name" required="required" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-user"></i></div>
                                         </div>
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="input-group">
-                                        <input type="email" class="form-control" placeholder="Email" required="required" />
+                                        <input type="email" class="form-control" name="email" placeholder="Email" required="required" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="far fa-envelope"></i></div>
                                         </div>
@@ -127,14 +127,14 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Mobile" required="required" />
+                                        <input type="text" class="form-control" name="mobile" placeholder="Mobile" required="required" />
                                         <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-mobile-alt"></i></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="input-group date" id="date" data-target-input="nearest">
+                                    <div class="input-group date" id="date" name="date" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" placeholder="Date" data-target="#date" data-toggle="datetimepicker" />
                                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="input-group time" id="time" data-target-input="nearest">
+                                    <div class="input-group time" id="time" name="time" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input" placeholder="Time" data-target="#time" data-toggle="datetimepicker" />
                                         <div class="input-group-append" data-target="#time" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="control-group">
                                     <div class="input-group">
-                                        <select class="custom-select form-control">
+                                        <select name="guest" class="custom-select form-control">
                                             <option selected>Guest</option>
                                             <option value="1">1 Guest</option>
                                             <option value="2">2 Guest</option>
@@ -336,39 +336,28 @@
 
 
         <!-- Food Start -->
-        <div class="food">
+        <div class="food mt-0">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <div class="food-item">
-                            <i class="flaticon-burger"></i>
-                            <h2>Burgers</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem.
-                            </p>
-                            <a href="">View Menu</a>
+                    <?php
+
+                    require_once "./php/db.php";
+                    $query = "SELECT * FROM food_categories";
+                    $result = mysqli_query($mysqli, $query);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                        <div class="col-md-4">
+                            <div class="food-item">
+                                <div class="food-item_img">
+                                    <img src="./img/foods/<?php echo $row['img']; ?>" alt="<?php echo $row['name']; ?>">
+                                </div>
+                                <h2><?php echo $row['name']; ?></h2>
+                                <p><?php echo $row['info']; ?></p>
+                                <a href="./menu.php">View Menu</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="food-item">
-                            <i class="flaticon-snack"></i>
-                            <h2>Snacks</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem.
-                            </p>
-                            <a href="">View Menu</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="food-item">
-                            <i class="flaticon-cocktail"></i>
-                            <h2>Beverages</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem.
-                            </p>
-                            <a href="">View Menu</a>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -412,7 +401,11 @@
                                             <div class="menu-text">
                                                 <h3>
                                                     <span><?php echo $row['name'] ?></span>
-                                                    <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                    <strong>$<?php if ($row['discPrice']) {
+                                                                    echo $row['discPrice'];
+                                                                } else {
+                                                                    echo $row['price'];
+                                                                } ?></strong>
                                                 </h3>
                                                 <p><?php echo $row['info'] ?></p>
                                             </div>
@@ -427,9 +420,9 @@
                         <div id="snacks" class="container tab-pane fade">
                             <div class="row">
                                 <div class="col-lg-7 col-md-12">
-                                <?php
-                                    $burgers = "SELECT * FROM all_foods WHERE categories_id = 2";
-                                    $result = mysqli_query($mysqli, $burgers);
+                                    <?php
+                                    $snacks = "SELECT * FROM all_foods WHERE categories_id = 2";
+                                    $result = mysqli_query($mysqli, $snacks);
 
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
@@ -440,7 +433,11 @@
                                             <div class="menu-text">
                                                 <h3>
                                                     <span><?php echo $row['name'] ?></span>
-                                                    <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                    <strong>$<?php if ($row['discPrice']) {
+                                                                    echo $row['discPrice'];
+                                                                } else {
+                                                                    echo $row['price'];
+                                                                } ?></strong>
                                                 </h3>
                                                 <p><?php echo $row['info'] ?></p>
                                             </div>
@@ -455,9 +452,9 @@
                         <div id="beverages" class="container tab-pane fade">
                             <div class="row">
                                 <div class="col-lg-7 col-md-12">
-                                <?php
-                                    $burgers = "SELECT * FROM all_foods WHERE categories_id = 3";
-                                    $result = mysqli_query($mysqli, $burgers);
+                                    <?php
+                                    $beverages = "SELECT * FROM all_foods WHERE categories_id = 3";
+                                    $result = mysqli_query($mysqli, $beverages);
 
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
@@ -468,7 +465,11 @@
                                             <div class="menu-text">
                                                 <h3>
                                                     <span><?php echo $row['name'] ?></span>
-                                                    <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                    <strong>$<?php if ($row['discPrice']) {
+                                                                    echo $row['discPrice'];
+                                                                } else {
+                                                                    echo $row['price'];
+                                                                } ?></strong>
                                                 </h3>
                                                 <p><?php echo $row['info'] ?></p>
                                             </div>
@@ -635,50 +636,33 @@
                     <h2>Latest From Food Blog</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="img/blog-1.jpg" alt="Blog">
-                            </div>
-                            <div class="blog-content">
-                                <h2 class="blog-title">Lorem ipsum dolor sit amet</h2>
-                                <div class="blog-meta">
-                                    <p><i class="far fa-user"></i>Admin</p>
-                                    <p><i class="far fa-list-alt"></i>Food</p>
-                                    <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
-                                    <p><i class="far fa-comments"></i>10</p>
+                    <?php
+
+                    require_once "./php/db.php";
+                    $query = "SELECT id, title1, info1, img, categories, comments, date FROM food_blog LIMIT 2";
+                    $result = mysqli_query($mysqli, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                        <div class="col-md-6">
+                            <div class="blog-item">
+                                <div class="blog-img">
+                                    <img src="img/blogGrid/<?php echo $row['img'] ?>" alt="<?php echo $row['title1'] ?>">
                                 </div>
-                                <div class="blog-text">
-                                    <p>
-                                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte liqum metus tortor. Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
-                                    </p>
-                                    <a class="btn custom-btn" href="">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="img/blog-2.jpg" alt="Blog">
-                            </div>
-                            <div class="blog-content">
-                                <h2 class="blog-title">Lorem ipsum dolor sit amet</h2>
-                                <div class="blog-meta">
-                                    <p><i class="far fa-user"></i>Admin</p>
-                                    <p><i class="far fa-list-alt"></i>Food</p>
-                                    <p><i class="far fa-calendar-alt"></i>01-Jan-2045</p>
-                                    <p><i class="far fa-comments"></i>10</p>
-                                </div>
-                                <div class="blog-text">
-                                    <p>
-                                        Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte liqum metus tortor. Lorem ipsum dolor sit amet elit. Neca pretim miura bitur facili ornare velit non vulpte
-                                    </p>
-                                    <a class="btn custom-btn" href="">Read More</a>
+                                <div class="blog-content">
+                                    <h2 class="blog-title"><?php echo $row['title1'] ?></h2>
+                                    <div class="blog-meta">
+                                        <p><i class="far fa-list-alt"></i><?php echo $row['categories'] ?></p>
+                                        <p><i class="far fa-calendar-alt"></i><?php echo $row['date'] ?></p>
+                                        <p><i class="far fa-comments"></i><?php echo $row['comments'] ?></p>
+                                    </div>
+                                    <div class="blog-text">
+                                        <p><?php echo $row['info1'] ?></p>
+                                        <a class="btn custom-btn" href="single.php?id=<?php echo $row['id'] ?>">Read More</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

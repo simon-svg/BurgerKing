@@ -31,42 +31,10 @@
     <?php require_once "../db.php" ?>
 
     <div class="admin">
-        <nav id="sidebar-admin">
-            <div class="sidebar-header">
-                <h3>Admin Panel</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a class="admin__item" href="index.php">Header Menu lists</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="chefs.php">Chefs</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="#">Food Categories</a>
-                </li>
-                <li class="admin__item_drop">
-                    <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle admin">Food</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a class="admin__item" href="burgers.php">Burgers</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="snacks.php">Snacks</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="beverages.php">Beverages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="admin__item" href="allFoods.php">All Foods</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="contacts.php">Contacts</a>
-                </li>
-            </ul>
-        </nav>
+        <?php
+        $navArr = ["index.php", "chefs.php", "#", "allFoods.php", "blogGrid.php", "contacts.php"];
+        require_once "../../components/adminFoodNav.php";
+        ?>
 
         <!-- ---------------------------------- HEADER MENUE LIST ----------------------------------------------- -->
 
@@ -80,6 +48,8 @@
                         <tr>
                             <th class="admin__table_title">id</th>
                             <th class="admin__table_title">name</th>
+                            <th class="admin__table_title">info</th>
+                            <th class="admin__table_title">img</th>
                             <th class="admin__table_title">panel</th>
                         </tr>
                         <?php
@@ -90,13 +60,17 @@
                         ?>
                             <tr class="admin__section_item">
                                 <td class="admin__section_item_td" style="width: 10%;">
-                                    <div class="admin__section_img">
-                                        <h3 class="admin__section_item_name"><?php echo $row['id'] ?></h3>
-                                    </div>
+                                    <h3 class="admin__section_item_name"><?php echo $row['id'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_name"><?php echo $row['info'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
                                     <div class="admin__section_img">
-                                        <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
+                                        <img src="../../img/foods/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
                                     </div>
                                 </td>
                                 <td class="admin__section_item_td">
@@ -116,22 +90,33 @@
                 $id = '';
                 $name = '';
 
-                if(isset($_GET["id"])){
+                if (isset($_GET["id"])) {
                     $query = 'SELECT * FROM food_categories WHERE id = ' . $_GET["id"];
                     $result = mysqli_query($mysqli, $query);
 
                     $row = mysqli_fetch_assoc($result);
                     $id = $row["id"];
                     $name = $row["name"];
+                    $info = $row["info"];
+                    $img = $row["img"];
                 }
 
                 ?>
-                <form class="admin__form"
-                action="<?php if($_GET['id']){echo './foodCategories/update.php?id=' . $id;}else{echo './foodCategories/insert.php';}?>"
-                method="POST" enctype="multipart/form-data">
+                <form class="admin__form" action="<?php if (isset($_GET['id'])) {
+                                                        echo './foodCategories/update.php?id=' . $id;
+                                                    } else {
+                                                        echo './foodCategories/insert.php';
+                                                    } ?>" method="POST" enctype="multipart/form-data">
                     <div class="form__flex">
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="name"
-                        value="<?php echo $name ?>" placeholder="Name" required>
+                        <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
+
+                        <textarea class="admin__inp admin__inp_food form-control" name="info" placeholder="Info"><?php echo $info ?></textarea>
+
+                        <input class="admin__inp form-control" type="file" name="img" <?php if (!isset($_GET['id'])) {
+                                                                                            echo 'required';
+                                                                                        } ?>>
+
+                        <input type="hidden" name="img" value="<?php echo $img ?>">
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add Food Categories</button>

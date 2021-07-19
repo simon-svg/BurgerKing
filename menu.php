@@ -40,43 +40,32 @@
     <div class="food mt-0">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-4">
-                    <div class="food-item">
-                        <i class="flaticon-burger"></i>
-                        <h2>Burgers</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem.
-                        </p>
-                        <a href="">View Menu</a>
+                <?php
+
+                require_once "./php/db.php";
+                $query = "SELECT * FROM food_categories";
+                $result = mysqli_query($mysqli, $query);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                ?>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <div class="food-item_img">
+                                <img src="./img/foods/<?php echo $row['img']; ?>" alt="<?php echo $row['name']; ?>">
+                            </div>
+                            <h2><?php echo $row['name']; ?></h2>
+                            <p><?php echo $row['info']; ?></p>
+                            <a href="#menu">View Menu</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="food-item">
-                        <i class="flaticon-snack"></i>
-                        <h2>Snacks</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem.
-                        </p>
-                        <a href="">View Menu</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="food-item">
-                        <i class="flaticon-cocktail"></i>
-                        <h2>Beverages</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem.
-                        </p>
-                        <a href="">View Menu</a>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
     <!-- Food End -->
 
     <!-- Menu Start -->
-    <div class="menu">
+    <div class="menu" id="menu">
         <div class="container">
             <div class="section-header text-center">
                 <p>Food Menu</p>
@@ -112,7 +101,11 @@
                                         <div class="menu-text">
                                             <h3>
                                                 <span><?php echo $row['name'] ?></span>
-                                                <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                <strong>$<?php if ($row['discPrice']) {
+                                                                echo $row['discPrice'];
+                                                            } else {
+                                                                echo $row['price'];
+                                                            } ?></strong>
                                             </h3>
                                             <p><?php echo $row['info'] ?></p>
                                         </div>
@@ -127,7 +120,7 @@
                     <div id="snacks" class="container tab-pane fade">
                         <div class="row">
                             <div class="col-lg-7 col-md-12">
-                            <?php
+                                <?php
                                 $burgers = "SELECT * FROM all_foods WHERE categories_id = 2";
                                 $result = mysqli_query($mysqli, $burgers);
 
@@ -140,7 +133,11 @@
                                         <div class="menu-text">
                                             <h3>
                                                 <span><?php echo $row['name'] ?></span>
-                                                <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                <strong>$<?php if ($row['discPrice']) {
+                                                                echo $row['discPrice'];
+                                                            } else {
+                                                                echo $row['price'];
+                                                            } ?></strong>
                                             </h3>
                                             <p><?php echo $row['info'] ?></p>
                                         </div>
@@ -155,7 +152,7 @@
                     <div id="beverages" class="container tab-pane fade">
                         <div class="row">
                             <div class="col-lg-7 col-md-12">
-                            <?php
+                                <?php
                                 $burgers = "SELECT * FROM all_foods WHERE categories_id = 3";
                                 $result = mysqli_query($mysqli, $burgers);
 
@@ -168,7 +165,11 @@
                                         <div class="menu-text">
                                             <h3>
                                                 <span><?php echo $row['name'] ?></span>
-                                                <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                <strong>$<?php if ($row['discPrice']) {
+                                                                echo $row['discPrice'];
+                                                            } else {
+                                                                echo $row['price'];
+                                                            } ?></strong>
                                             </h3>
                                             <p><?php echo $row['info'] ?></p>
                                         </div>

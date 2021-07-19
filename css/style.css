@@ -638,6 +638,14 @@ a:focus {
     left: 0;
     background: #719a0a;
 }
+.food-item_img{
+    width: 80px;
+    margin: 0 auto 20px;
+}
+.food-item_img > img{
+    width: 100%;
+    display: block;
+}
 
 
 

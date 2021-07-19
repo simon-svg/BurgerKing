@@ -26,47 +26,15 @@
     <link href="../../css/style.css" rel="stylesheet">
 </head>
 
-<body >
+<body>
 
     <?php require_once "../db.php" ?>
 
     <div class="admin">
-        <nav id="sidebar-admin">
-            <div class="sidebar-header">
-                <h3>Admin Panel</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a class="admin__item" href="index.php">Header Menu lists</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="chefs.php">Chefs</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="foodCategories.php">Food Categories</a>
-                </li>
-                <li class="admin__item_drop">
-                    <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle admin">Food</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a class="admin__item" href="burgers.php">Burgers</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="snacks.php">Snacks</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="beverages.php">Beverages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="admin__item" href="#">All Foods</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="contacts.php">Contacts</a>
-                </li>
-            </ul>
-        </nav>
+        <?php
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "#", "blogGrid.php", "contacts.php"];
+        require_once "../../components/adminFoodNav.php";
+        ?>
 
         <!-- ---------------------------------- HEADER MENUE LIST ----------------------------------------------- -->
 
@@ -120,7 +88,7 @@
                                         <?php echo $row['date'] ?></h3>
                                     </td>
                                     <td class="admin__section_item_td">
-                                        <a href="?id=<?php echo $row["id"] ?>">
+                                        <a href="?catId=<?php echo $_GET["catId"] ?>&id=<?php echo $row["id"] ?>">
                                             <i class="example__class admin__icon fas fa-pencil-alt"></i>
                                         </a>
                                         <a href="./allFoods/remove.php?id=<?php echo $row["id"] ?>">
@@ -141,7 +109,7 @@
                     $descPrice = '';
                     $categoriesId = '';
 
-                    if(isset($_GET["id"])){
+                    if (isset($_GET["id"])) {
                         $query = 'SELECT * FROM all_foods WHERE id = ' . $_GET["id"];
                         $result = mysqli_query($mysqli, $query);
 
@@ -157,28 +125,25 @@
 
                     ?>
                     <form class="admin__form"
-                    action="<?php if($_GET['id']){echo './allFoods/update.php?id=' . $id;}else{echo './allFoods/insert.php';}?>"
-                    method="POST" enctype="multipart/form-data">
+                    action="<?php if (isset($_GET['id'])) {echo './allFoods/update.php?id=' . $id;} else {echo './allFoods/insert.php';} ?>" method="POST" enctype="multipart/form-data">
                         <div class="form__flex">
-                            <input class="admin__inp admin__inp_food form-control" type="text" name="name"
-                            value="<?php echo $name; ?>" placeholder="Name" required>
+                            <input class="admin__inp admin__inp_food form-control" type="text" name="name" value="<?php echo $name; ?>" placeholder="Name" required>
 
                             <textarea class="admin__inp admin__inp_food form-control" name="info" placeholder="Info"><?php echo $info; ?></textarea>
 
-                            <input class="admin__inp admin__inp_food form-control" type="file" name="img" <?php if(!$_GET['id']){echo 'required';} ?>>
+                            <input class="admin__inp admin__inp_food form-control" type="file" name="img"
+                            <?php if (!isset($_GET['id'])) {echo 'required';} ?>>
 
-                            <input class="admin__inp admin__inp_food form-control" type="number" name="price"
-                            value="<?php echo $price; ?>" placeholder="Price" required>
+                            <input class="admin__inp admin__inp_food form-control" type="number" name="price" value="<?php echo $price; ?>" placeholder="Price" required>
 
-                            <input class="admin__inp admin__inp_food form-control" type="number" name="discPrice"
-                            value="<?php echo $discPrice; ?>" placeholder="Discount Price">
+                            <input class="admin__inp admin__inp_food form-control" type="number" name="discPrice" value="<?php echo $discPrice; ?>" placeholder="Discount Price">
 
                             <select name="categoriesId" id="categoriesId" name="categoriesId">
                                 <?php
                                 $query = 'SELECT * FROM food_categories';
                                 $result = mysqli_query($mysqli, $query);
 
-                                while($row = mysqli_fetch_assoc($result)){?>
+                                while ($row = mysqli_fetch_assoc($result)) { ?>
                                     <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
                                 <?php } ?>
                             </select>
@@ -209,9 +174,9 @@
     <!-- Template Javascript -->
     <script src='../../js/admin.js'></script>
 
-	<script>
-		$('option[value="<?php echo $categoriesId ?>"]').attr('selected', true);
-	</script>
+    <script>
+        $('option[value="<?php echo $categoriesId ?>"]').attr('selected', true);
+    </script>
 </body>
 
 </html>

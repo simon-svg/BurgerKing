@@ -156,14 +156,14 @@
                             <div class="col-lg-7 col-md-12">
                                 <?php
                                 require_once "./php/db.php";
-                                $burgers = "SELECT * FROM burgers";
+                                $burgers = "SELECT * FROM all_foods WHERE categories_id = 1";
                                 $result = mysqli_query($mysqli, $burgers);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <div class="menu-item">
                                         <div class="menu-img">
-                                            <img src="./img/burgers/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
+                                            <img src="./img/foods/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
                                         </div>
                                         <div class="menu-text">
                                             <h3>
@@ -184,14 +184,14 @@
                         <div class="row">
                             <div class="col-lg-7 col-md-12">
                             <?php
-                                $burgers = "SELECT * FROM snacks";
-                                $result = mysqli_query($mysqli, $burgers);
+                                $snacks = "SELECT * FROM all_foods WHERE categories_id = 2";
+                                $result = mysqli_query($mysqli, $snacks);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <div class="menu-item">
                                         <div class="menu-img">
-                                            <img src="./img/snacks/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
+                                            <img src="./img/foods/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
                                         </div>
                                         <div class="menu-text">
                                             <h3>
@@ -212,14 +212,14 @@
                         <div class="row">
                             <div class="col-lg-7 col-md-12">
                             <?php
-                                $burgers = "SELECT * FROM beverages";
-                                $result = mysqli_query($mysqli, $burgers);
+                                $beverages = "SELECT * FROM all_foods WHERE categories_id = 3";
+                                $result = mysqli_query($mysqli, $beverages);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <div class="menu-item">
                                         <div class="menu-img">
-                                            <img src="./img/Beverages/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
+                                            <img src="./img/foods/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
                                         </div>
                                         <div class="menu-text">
                                             <h3>

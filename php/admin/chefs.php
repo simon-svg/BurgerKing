@@ -31,44 +31,12 @@
     <?php require_once "../db.php" ?>
 
     <div class="admin">
-        <nav id="sidebar-admin">
-            <div class="sidebar-header">
-                <h3>Admin Panel</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a class="admin__item" href="index.php">Header Menu lists</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="#">Chefs</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="foodCategories.php">Food Categories</a>
-                </li>
-                <li class="admin__item_drop">
-                    <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle admin">Food</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a class="admin__item" href="burgers.php">Burgers</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="snacks.php">Snacks</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="beverages.php">Beverages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="admin__item" href="allFoods.php">All Foods</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="contacts.php">Contacts</a>
-                </li>
-            </ul>
-        </nav>
+        <?php
+        $navArr = ["index.php", "#", "foodCategories.php", "allFoods.php", "blogGrid.php", "contacts.php"];
+        require_once "../../components/adminFoodNav.php";
+        ?>
 
-<!-- ---------------------------------- CHEFS ----------------------------------------------- -->
+        <!-- ---------------------------------- CHEFS ----------------------------------------------- -->
 
         <div class="admin__section admin__section_header-list">
             <div class="admin__section_head">
@@ -121,7 +89,7 @@
                 $position = '';
                 $img = '';
 
-                if(isset($_GET["id"])){
+                if (isset($_GET["id"])) {
                     $query = 'SELECT * FROM chefs WHERE id = ' . $_GET["id"];
                     $result = mysqli_query($mysqli, $query);
 
@@ -133,18 +101,19 @@
                 }
 
                 ?>
-                <form class="admin__form"
-                action="<?php if($_GET['id']){echo './chefs/update.php?id=' . $id;}else{echo './chefs/insert.php';} ?>"
-                method="POST" enctype="multipart/form-data">
+                <form class="admin__form" action="<?php if (isset($_GET['id'])) {
+                                                        echo './chefs/update.php?id=' . $id;
+                                                    } else {
+                                                        echo './chefs/insert.php';
+                                                    } ?>" method="POST" enctype="multipart/form-data">
                     <div class="form__flex">
-                        <input class="admin__inp form-control" type="text" name="name"
-                        value="<?php echo $name; ?>" placeholder="Name" required>
+                        <input class="admin__inp form-control" type="text" name="name" value="<?php echo $name; ?>" placeholder="Name" required>
 
-                        <input class="admin__inp form-control" type="text" name="position"
-                        value="<?php echo $position ?>" placeholder="Position" required>
+                        <input class="admin__inp form-control" type="text" name="position" value="<?php echo $position ?>" placeholder="Position" required>
 
-                        <input class="admin__inp form-control" type="file" name="img"
-                        <?php if(!$_GET['id']){echo 'required';} ?>>
+                        <input class="admin__inp form-control" type="file" name="img" <?php if (!isset($_GET['id'])) {
+                                                                                            echo 'required';
+                                                                                        } ?>>
 
                         <input type="hidden" name="img" value="<?php echo $img ?>">
                     </div>

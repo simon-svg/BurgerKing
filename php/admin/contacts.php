@@ -31,42 +31,10 @@
     <?php require_once "../db.php" ?>
 
     <div class="admin">
-        <nav id="sidebar-admin">
-            <div class="sidebar-header">
-                <h3>Admin Panel</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a class="admin__item" href="index.php">Header Menu lists</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="chefs.php">Chefs</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="foodCategories.php">Food Categories</a>
-                </li>
-                <li class="admin__item_drop">
-                    <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle admin">Food</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a class="admin__item" href="burgers.php">Burgers</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="snacks.php">Snacks</a>
-                        </li>
-                        <li>
-                            <a class="admin__item" href="beverages.php">Beverages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="admin__item" href="allFoods.php">All Foods</a>
-                </li>
-                <li>
-                    <a class="admin__item" href="#">Contacts</a>
-                </li>
-            </ul>
-        </nav>
+        <?php
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "#"];
+        require_once "../../components/adminFoodNav.php";
+        ?>
 
         <!-- ---------------------------------- CONTACTS ----------------------------------------------- -->
 
@@ -92,9 +60,7 @@
                         ?>
                             <tr class="admin__section_item">
                                 <td class="admin__section_item_td">
-                                    <div class="admin__section_img">
-                                        <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
-                                    </div>
+                                    <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
                                     <h3 class="admin__section_item_name"><?php echo $row['email'] ?></h3>
@@ -126,7 +92,7 @@
                 $subject = '';
                 $message = '';
 
-                if(isset($_GET["id"])){
+                if (isset($_GET["id"])) {
                     $query = 'SELECT * FROM contact WHERE id = ' . $_GET["id"];
                     $result = mysqli_query($mysqli, $query);
 
@@ -139,21 +105,19 @@
                 }
 
                 ?>
-                <form class="admin__form"
-                action="<?php if($_GET['id']){echo './contacts/update.php?id=' . $id;}else{echo './contacts/insert.php';}?>"
-                method="POST" enctype="multipart/form-data">
+                <form class="admin__form" action="<?php if (isset($_GET['id'])) {
+                                                        echo './contacts/update.php?id=' . $id;
+                                                    } else {
+                                                        echo './contacts/insert.php';
+                                                    } ?>" method="POST">
                     <div class="form__flex">
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="name"
-                        value="<?php echo $name ?>" placeholder="Name" required>
+                        <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
 
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="email"
-                        value="<?php echo $email ?>" placeholder="Email" required>
+                        <input class="admin__inp admin__inp_header form-control" type="text" name="email" value="<?php echo $email ?>" placeholder="Email" required>
 
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="subject"
-                        value="<?php echo $subject ?>" placeholder="Subject" required>
+                        <input class="admin__inp admin__inp_header form-control" type="text" name="subject" value="<?php echo $subject ?>" placeholder="Subject" required>
 
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="message"
-                        value="<?php echo $message ?>" placeholder="Message" required>
+                        <input class="admin__inp admin__inp_header form-control" type="text" name="message" value="<?php echo $message ?>" placeholder="Message" required>
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add contacts</button>
