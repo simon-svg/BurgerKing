@@ -32,7 +32,7 @@
 
     <div class="admin">
         <?php
-        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "contacts.php"];
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "contacts.php", "booking.php", "homeSection.php", "tags.php"];
         require_once "../../components/adminFoodNav.php";
         ?>
 
@@ -55,7 +55,7 @@
                     $info3 = '';
                     $img = '';
                     $categories = '';
-                    $comments = '';
+                    $text = '';
 
                     if (isset($_GET["id"])) {
                         $query = 'SELECT * FROM food_blog WHERE id = ' . $_GET["id"];
@@ -71,7 +71,7 @@
                         $info3 = $row["info3"];
                         $img = $row["img"];
                         $categories = $row["categories"];
-                        $comments = $row["comments"];
+                        $text = $row["text"];
                     }
 
                     ?>
@@ -94,13 +94,14 @@
                             <textarea class="admin__inp admin__inp_food form-control" name="info3" placeholder="Info3"><?php echo $info1; ?></textarea>
                             <br>
 
+                            <textarea class="admin__inp admin__inp_food form-control" name="text" placeholder="Tag"><?php echo $text; ?></textarea>
+                            <br>
+
 
                             <input class="admin__inp admin__inp_food form-control" type="file"
                             name="img" <?php if (!isset($_GET['id'])) {echo 'required';} ?>>
 
                             <input class="admin__inp admin__inp_food form-control" type="text" name="categories" value="<?php echo $categories; ?>" placeholder="Categories" required>
-
-                            <input class="admin__inp admin__inp_food form-control" type="text" name="comments" value="<?php echo $comments; ?>" placeholder="Comments">
 
                             <input type="hidden" name="img" value="<?php echo $img ?>">
                         </div>

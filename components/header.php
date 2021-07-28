@@ -13,19 +13,9 @@
                 <a href='team.php' class='nav-item nav-link <?php echo $headerArr[3]; ?>'>Chef</a>
                 <a href='menu.php' class='nav-item nav-link <?php echo $headerArr[4]; ?>'>Menu</a>
                 <a href='booking.php' class='nav-item nav-link <?php echo $headerArr[5]; ?>'>Booking</a>
-                <div class='nav-item dropdown'>
-                    <a href='#' class='nav-link dropdown-toggle <?php echo $headerArr[6]; ?> <?php echo $headerArr[7]; ?>' data-toggle='dropdown'>
-                        Pages
-                    </a>
-                    <div class='dropdown-menu'>
-                        <a href='blog.php' class='dropdown-item <?php echo $headerArr[6]; ?>'>Blog Grid</a>
-                        <a href='single.php' class='dropdown-item <?php echo $headerArr[7]; ?>'>Blog Detail</a>
-                    </div>
-                </div>
-                <a href='contact.php' class='nav-item nav-link <?php echo $headerArr[9]; ?>'>Contact</a>
+                <a href='blog.php' class='nav-item nav-link <?php echo $headerArr[6]; ?>'>Blog Grid</a>
+                <a href='contact.php' class='nav-item nav-link <?php echo $headerArr[7]; ?>'>Contact</a>
             </div>
         </div>
     </div>
 </div>
-
-

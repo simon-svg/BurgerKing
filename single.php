@@ -28,7 +28,7 @@
 
 <body>
     <?php
-    $headerArr = ["", "", "", "", "", "", "", "active", "", "", ""];
+    $headerArr = ["", "", "", "", "", "", "active", ""];
     require_once "./components/header.php" ?>
 
     <?php
@@ -58,152 +58,102 @@
                         <h2><?php echo $row['title3'] ?></h2>
                         <p><?php echo $row['info3'] ?></p>
                     </div>
+                    <?php
+                    $newText = $row['tag'];
+                    $blogs = explode(",", $newText);
+                    ?>
                     <div class="single-tags">
-                        <a href="">National</a>
-                        <a href="">International</a>
-                        <a href="">Economics</a>
-                        <a href="">Politics</a>
-                        <a href="">Lifestyle</a>
-                        <a href="">Technology</a>
-                        <a href="">Trades</a>
+                        <?php
+                        foreach ($blogs as $blog) {
+                        ?>
+                            <a href="blog.php?tag=<?php echo $blog ?>"><?php echo $blog ?></a>
+                        <?php
+                        }
+                        ?>
                     </div>
-                    <div class="single-bio">
-                        <div class="single-bio-img">
-                            <img src="img/user.jpg" />
-                        </div>
-                        <div class="single-bio-text">
-                            <h3>Author Name</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet elit. Integer lorem augue purus mollis sapien, non eros leo in nunc. Donec a nulla vel turpis tempor ac vel justo. In hac platea dictumst.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="single-related">
-                        <h2>Related Post</h2>
-                        <div class="owl-carousel related-slider">
-                            <div class="post-item">
-                                <div class="post-img">
-                                    <img src="img/post-1.jpg" />
-                                </div>
-                                <div class="post-text">
-                                    <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                    <div class="post-meta">
-                                        <p>By<a href="">Admin</a></p>
-                                        <p>In<a href="">Web Design</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-item">
-                                <div class="post-img">
-                                    <img src="img/post-2.jpg" />
-                                </div>
-                                <div class="post-text">
-                                    <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                    <div class="post-meta">
-                                        <p>By<a href="">Admin</a></p>
-                                        <p>In<a href="">Web Design</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-item">
-                                <div class="post-img">
-                                    <img src="img/post-3.jpg" />
-                                </div>
-                                <div class="post-text">
-                                    <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                    <div class="post-meta">
-                                        <p>By<a href="">Admin</a></p>
-                                        <p>In<a href="">Web Design</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-item">
-                                <div class="post-img">
-                                    <img src="img/post-4.jpg" />
-                                </div>
-                                <div class="post-text">
-                                    <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                    <div class="post-meta">
-                                        <p>By<a href="">Admin</a></p>
-                                        <p>In<a href="">Web Design</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
 
+                    require_once "php/db.php";
+                    $query = "SELECT * FROM comment WHERE blog_id = '" . $_GET['id'] . "' AND parent_id = 0";
+                    $queryCount = "SELECT * FROM comment WHERE blog_id = '" . $_GET['id'] . "'";
+                    $result = mysqli_query($mysqli, $query);
+                    $resultCount = mysqli_query($mysqli, $queryCount);
+                    $count = mysqli_num_rows($resultCount);
+
+                    ?>
                     <div class="single-comment">
-                        <h2>3 Comments</h2>
+                        <h2><?php echo $count; ?> Comments</h2>
                         <ul class="comment-list">
-                            <li class="comment-item">
-                                <div class="comment-body">
-                                    <div class="comment-img">
-                                        <img src="img/user.jpg" />
-                                    </div>
-                                    <div class="comment-text">
-                                        <h3><a href="">Josh Dunn</a></h3>
-                                        <span>01 Jan 2045 at 12:00pm</span>
-                                        <p>
-                                            Lorem ipsum dolor sit amet elit. Integer lorem augue purus mollis sapien, non eros leo in nunc. Donec a nulla vel turpis tempor ac vel justo. In hac platea dictumst.
-                                        </p>
-                                        <a class="btn" href="">Reply</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="comment-item">
-                                <div class="comment-body">
-                                    <div class="comment-img">
-                                        <img src="img/user.jpg" />
-                                    </div>
-                                    <div class="comment-text">
-                                        <h3><a href="">Josh Dunn</a></h3>
-                                        <p><span>01 Jan 2045 at 12:00pm</span></p>
-                                        <p>
-                                            Lorem ipsum dolor sit amet elit. Integer lorem augue purus mollis sapien, non eros leo in nunc. Donec a nulla vel turpis tempor ac vel justo. In hac platea dictumst.
-                                        </p>
-                                        <a class="btn" href="">Reply</a>
-                                    </div>
-                                </div>
-                                <ul class="comment-child">
-                                    <li class="comment-item">
-                                        <div class="comment-body">
-                                            <div class="comment-img">
-                                                <img src="img/user.jpg" />
-                                            </div>
-                                            <div class="comment-text">
-                                                <h3><a href="">Josh Dunn</a></h3>
-                                                <p><span>01 Jan 2045 at 12:00pm</span></p>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet elit. Integer lorem augue purus mollis sapien, non eros leo in nunc. Donec a nulla vel turpis tempor ac vel justo. In hac platea dictumst.
-                                                </p>
-                                                <a class="btn" href="">Reply</a>
-                                            </div>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                <li class="comment-item">
+                                    <div class="comment-body">
+                                        <div class="comment-img">
+                                            <img src="img/user-4.png" />
                                         </div>
-                                    </li>
-                                </ul>
-                            </li>
+                                        <div class="comment-text">
+                                            <h3><a href=""><?php echo $row['name']; ?> <?php echo $row['last_name']; ?></a></h3>
+                                            <p><span><?php echo date("Y/m/d H:i:s", $row['date']); ?></span></p>
+                                            <p class="comments__message"><?php echo $row['message']; ?></p>
+                                            <a class="btn" href="?id=<?php echo $_GET['id'] ?>&reply=<?php echo $row['id'] ?>">Reply</a>
+                                        </div>
+                                    </div>
+                                    <ul class="comment-child">
+                                        <?php
+                                        $query1 = "SELECT * FROM comment WHERE blog_id = '" . $_GET['id'] . "' AND parent_id = '" . $row['id'] . "'";
+                                        $result1 = mysqli_query($mysqli, $query1);
+                                        while ($row = mysqli_fetch_assoc($result1)) {
+                                        ?>
+                                            <li class="comment-item">
+                                                <div class="comment-body">
+                                                    <div class="comment-img">
+                                                        <img src="img/user-4.png" />
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        <h3><a href=""><?php echo $row['name']; ?> <?php echo $row['last_name']; ?></a></h3>
+                                                        <p><span><?php echo date("Y/m/d H:i:s", $row['date']); ?></span></p>
+                                                        <p class="comments__message"><?php echo $row['message']; ?></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
+                    <?php
+                    $reply = 0;
+                    if (isset($_GET['reply'])) {
+                        $reply = $_GET['reply'];
+                    }
+                    ?>
                     <div class="comment-form">
                         <h2>Leave a comment</h2>
-                        <form>
+                        <form action="php/singleComment.php" method="POST">
                             <div class="form-group">
                                 <label for="name">Name *</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" name="name" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" name="lastName" class="form-control" id="lastName">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="website">Website</label>
-                                <input type="url" class="form-control" id="website">
+                                <input type="email" name="email" class="form-control" id="email">
                             </div>
 
                             <div class="form-group">
                                 <label for="message">Message *</label>
-                                <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                <textarea id="message" name="message" cols="30" rows="5" class="form-control"></textarea>
                             </div>
+
+                            <input type="hidden" name="getId" value="<?php echo $_GET['id'] ?>">
+                            <input type="hidden" name="replyId" value="<?php echo $reply; ?>">
                             <div class="form-group">
                                 <input type="submit" value="Post Comment" class="btn custom-btn">
                             </div>
@@ -225,271 +175,21 @@
                         <div class="sidebar-widget">
                             <h2 class="widget-title">Recent Post</h2>
                             <div class="recent-post">
-                                <div class="post-item">
-                                    <div class="post-img">
-                                        <img src="img/post-1.jpg" />
-                                    </div>
-                                    <div class="post-text">
-                                        <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                        <div class="post-meta">
-                                            <p>By<a href="">Admin</a></p>
-                                            <p>In<a href="">Web Design</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-item">
-                                    <div class="post-img">
-                                        <img src="img/post-2.jpg" />
-                                    </div>
-                                    <div class="post-text">
-                                        <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                        <div class="post-meta">
-                                            <p>By<a href="">Admin</a></p>
-                                            <p>In<a href="">Web Design</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-item">
-                                    <div class="post-img">
-                                        <img src="img/post-3.jpg" />
-                                    </div>
-                                    <div class="post-text">
-                                        <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                        <div class="post-meta">
-                                            <p>By<a href="">Admin</a></p>
-                                            <p>In<a href="">Web Design</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-item">
-                                    <div class="post-img">
-                                        <img src="img/post-4.jpg" />
-                                    </div>
-                                    <div class="post-text">
-                                        <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                        <div class="post-meta">
-                                            <p>By<a href="">Admin</a></p>
-                                            <p>In<a href="">Web Design</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-item">
-                                    <div class="post-img">
-                                        <img src="img/post-5.jpg" />
-                                    </div>
-                                    <div class="post-text">
-                                        <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                        <div class="post-meta">
-                                            <p>By<a href="">Admin</a></p>
-                                            <p>In<a href="">Web Design</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <?php
 
-                        <div class="sidebar-widget">
-                            <div class="tab-post">
-                                <ul class="nav nav-pills nav-justified">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="pill" href="#featured">Featured</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#popular">Popular</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#latest">Latest</a>
-                                    </li>
-                                </ul>
-
-                                <div class="tab-content">
-                                    <div id="featured" class="container tab-pane active">
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-1.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
+                                $query = "SELECT id, img, title1 FROM food_blog";
+                                $result = mysqli_query($mysqli, $query);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <div class="post-item">
+                                        <div class="post-img">
+                                            <img src="img/blogGrid/<?php echo $row['img']; ?>" />
                                         </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-2.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-3.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-4.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-5.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
+                                        <div class="post-text">
+                                            <a href="?id=<?php echo $row['id']; ?>"><?php echo $row['title1']; ?></a>
                                         </div>
                                     </div>
-                                    <div id="popular" class="container tab-pane fade">
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-1.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-2.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-3.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-4.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-5.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="latest" class="container tab-pane fade">
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-1.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-2.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-3.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-4.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-item">
-                                            <div class="post-img">
-                                                <img src="img/post-5.jpg" />
-                                            </div>
-                                            <div class="post-text">
-                                                <a href="">Lorem ipsum dolor sit amet consec adipis elit</a>
-                                                <div class="post-meta">
-                                                    <p>By<a href="">Admin</a></p>
-                                                    <p>In<a href="">Web Design</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -497,13 +197,16 @@
                             <h2 class="widget-title">Categories</h2>
                             <div class="category-widget">
                                 <ul>
-                                    <li><a href="">National</a><span>(98)</span></li>
-                                    <li><a href="">International</a><span>(87)</span></li>
-                                    <li><a href="">Economics</a><span>(76)</span></li>
-                                    <li><a href="">Politics</a><span>(65)</span></li>
-                                    <li><a href="">Lifestyle</a><span>(54)</span></li>
-                                    <li><a href="">Technology</a><span>(43)</span></li>
-                                    <li><a href="">Trades</a><span>(32)</span></li>
+                                    <?php
+                                    $query = "SELECT id, name FROM food_categories";
+                                    $result = mysqli_query($mysqli, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $query1 = "SELECT id FROM all_foods WHERE categories_id = '" . $row['id'] . "'";
+                                        $result1 = mysqli_query($mysqli, $query1);
+                                        $count = mysqli_num_rows($result1);
+                                    ?>
+                                        <li><a href="menu.php#menu"><?php echo $row["name"] ?></a><span>(<?php echo $count; ?>)</span></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -511,13 +214,13 @@
                         <div class="sidebar-widget">
                             <h2 class="widget-title">Tags Cloud</h2>
                             <div class="tag-widget">
-                                <a href="">National</a>
-                                <a href="">International</a>
-                                <a href="">Economics</a>
-                                <a href="">Politics</a>
-                                <a href="">Lifestyle</a>
-                                <a href="">Technology</a>
-                                <a href="">Trades</a>
+                                <?php
+                                $query = "SELECT * FROM tags";
+                                $result = mysqli_query($mysqli, $query);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <a href="blog.php?&tag=<?php echo $row['name']; ?>"><?php echo $row["name"]; ?></a>
+                                <?php } ?>
                             </div>
                         </div>
 

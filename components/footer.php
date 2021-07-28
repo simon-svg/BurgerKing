@@ -1,6 +1,4 @@
-<?php
-
-echo "<div class='footer'>
+<div class='footer'>
     <div class='container'>
         <div class='row'>
             <div class='col-lg-7'>
@@ -22,11 +20,14 @@ echo "<div class='footer'>
                     <div class='col-md-6'>
                         <div class='footer-link'>
                             <h2>Quick Links</h2>
-                            <a href=''>Terms of use</a>
-                            <a href=''>Privacy policy</a>
-                            <a href=''>Cookies</a>
-                            <a href=''>Help</a>
-                            <a href=''>FQAs</a>
+                            <?php
+                            require_once "php/db.php";
+                            $query = "SELECT name FROM food_categories";
+                            $result = mysqli_query($mysqli, $query);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                <a href='menu.php#menu'><?php echo $row["name"] ?></a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -37,9 +38,9 @@ echo "<div class='footer'>
                     <p>
                         Lorem ipsum dolor sit amet elit. Quisque eu lectus a leo dictum nec non quam. Tortor eu placerat rhoncus, lorem quam iaculis felis, sed lacus neque id eros.
                     </p>
-                    <div class='form'>
-                        <input class='form-control' placeholder='Email goes here'>
-                        <button class='btn custom-btn'>Submit</button>
+                    <div class='form suscribe-form'>
+                        <input class='form-control subscribe-inp' placeholder='Email goes here'>
+                        <button class='btn custom-btn subscribe-btn'>Submit</button>
                     </div>
                 </div>
             </div>
@@ -67,6 +68,4 @@ echo "<div class='footer'>
 <script src='mail/contact.js'></script>
 
 <!-- Template Javascript -->
-<script src='js/main.js'></script>";
-
-?>
+<script src='js/main.js'></script>

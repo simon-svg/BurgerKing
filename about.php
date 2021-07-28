@@ -28,7 +28,7 @@
 
 <body>
     <?php
-    $headerArr = ["", "active", "", "", "", "", "", "", "", "", ""];
+    $headerArr = ["", "active", "", "", "", "", "", ""];
     require_once "./components/header.php" ?>
 
 

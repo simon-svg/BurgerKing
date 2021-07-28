@@ -9,7 +9,7 @@ $info1 = $_POST["info1"];
 $info2 = $_POST["info2"];
 $info3 = $_POST["info3"];
 $categories = $_POST["categories"];
-$comments = $_POST["comments"];
+$text = $_POST['text'];
 $img = "";
 $date = time();
 
@@ -28,8 +28,9 @@ foreach ($_FILES as $key => $file) {
 	}
 }
 
-$query = "INSERT INTO food_blog (title1, title2, title3, info1, info2, info3, img, categories, comments, date)
-VALUES ('$title1', '$title2', '$title3', '$info1', '$info2', '$info3', '$img', '$categories', '$comments', '$date')";
+$query = "INSERT INTO food_blog (title1, title2, title3, info1, info2, info3, img, categories, tag, date)
+VALUES ('$title1', '$title2', '$title3', '$info1', '$info2', '$info3', '$img', '$categories',
+'$text', '$date')";
 
 $result = mysqli_query($mysqli, $query);
 
@@ -38,5 +39,5 @@ if(!$result){
     echo mysqli_error($mysqli);
 }
 else{
-    header("Location: ../index.php");
+    header("Location: ../blogGrid.php");
 }

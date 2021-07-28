@@ -32,94 +32,119 @@
 
     <div class="admin">
         <?php
-        $navArr = ["index.php", "chefs.php", "#", "allFoods.php", "blogGrid.php", "contacts.php", "booking.php", "homeSection.php", "tags.php"];
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "contacts.php", "booking.php", "#", "tags.php"];
         require_once "../../components/adminFoodNav.php";
         ?>
 
-        <!-- ---------------------------------- HEADER MENUE LIST ----------------------------------------------- -->
+        <!-- ---------------------------------- CHEFS ----------------------------------------------- -->
 
         <div class="admin__section admin__section_header-list">
             <div class="admin__section_head">
-                <h3 class="admin__section_title">food categories</h3>
+                <h3 class="admin__section_title">Home Section</h3>
             </div>
             <div class="admin__section_content">
-                <div class="admin__contact">
+                <div class="admin__chefs">
                     <table class="admin__table">
                         <tr>
-                            <th class="admin__table_title">id</th>
-                            <th class="admin__table_title">name</th>
-                            <th class="admin__table_title">info</th>
-                            <th class="admin__table_title">img</th>
+                            <th class="admin__table_title">title1</th>
+                            <th class="admin__table_title">title2</th>
+                            <th class="admin__table_title">subtitle1</th>
+                            <th class="admin__table_title">subtitle2</th>
+                            <th class="admin__table_title">img1</th>
+                            <th class="admin__table_title">img2</th>
                             <th class="admin__table_title">panel</th>
                         </tr>
                         <?php
-                        $query = "SELECT * FROM food_categories";
+                        $query = "SELECT * FROM home";
                         $result = mysqli_query($mysqli, $query);
 
                         while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                             <tr class="admin__section_item">
-                                <td class="admin__section_item_td" style="width: 10%;">
-                                    <h3 class="admin__section_item_name"><?php echo $row['id'] ?></h3>
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_name"><?php echo $row['title1'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
+                                    <h3 class="admin__section_item_name"><?php echo $row['title2'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['info'] ?></h3>
+                                    <h3 class="admin__section_item_name"><?php echo $row['subtitle1'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_name"><?php echo $row['subtitle2'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
                                     <div class="admin__section_img">
-                                        <img src="../../img/foods/<?php echo $row['img'] ?>" alt="<?php echo $row['name'] ?>">
+                                        <img src="../../img/home/<?php echo $row['img1'] ?>" alt="bg">
+                                    </div>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <div class="admin__section_img">
+                                        <img src="../../img/home/<?php echo $row['img2'] ?>" alt="bg">
                                     </div>
                                 </td>
                                 <td class="admin__section_item_td">
                                     <a href="?id=<?php echo $row["id"] ?>">
                                         <i class="example__class admin__icon fas fa-pencil-alt"></i>
                                     </a>
-                                    <a href="./foodCategories/remove.php?id=<?php echo $row["id"] ?>">
-                                        <i class="admin__icon fas fa-times"></i>
-                                    </a>
                                 </td>
                             </tr>
                         <?php } ?>
+
                     </table>
                 </div>
                 <?php
 
                 $id = '';
-                $name = '';
+                $title1 = '';
+                $title2 = '';
+                $subtitle1 = '';
+                $subtitle2 = '';
+                $img1 = '';
+                $img2 = '';
 
                 if (isset($_GET["id"])) {
-                    $query = 'SELECT * FROM food_categories WHERE id = ' . $_GET["id"];
+                    $query = 'SELECT * FROM home WHERE id = ' . $_GET["id"];
                     $result = mysqli_query($mysqli, $query);
 
                     $row = mysqli_fetch_assoc($result);
                     $id = $row["id"];
-                    $name = $row["name"];
-                    $info = $row["info"];
-                    $img = $row["img"];
+                    $title1 = $row["title1"];
+                    $title2 = $row["title2"];
+                    $subtitle1 = $row["subtitle1"];
+                    $subtitle2 = $row["subtitle2"];
+                    $img1 = $row["img1"];
+                    $img2 = $row["img2"];
                 }
 
                 ?>
                 <form class="admin__form" action="<?php if (isset($_GET['id'])) {
-                                                        echo './foodCategories/update.php?id=' . $id;
+                                                        echo './home/update.php?id=' . $id;
                                                     } else {
-                                                        echo './foodCategories/insert.php';
+                                                        echo './home/insert.php';
                                                     } ?>" method="POST" enctype="multipart/form-data">
                     <div class="form__flex">
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
+                        <input class="admin__inp form-control" type="text" name="title1" value="<?php echo $title1; ?>" placeholder="Title1" required>
 
-                        <textarea class="admin__inp admin__inp_food form-control" name="info" placeholder="Info"><?php echo $info ?></textarea>
+                        <input class="admin__inp form-control" type="text" name="title2" value="<?php echo $title2; ?>" placeholder="Title2" required>
 
-                        <input class="admin__inp form-control" type="file" name="img" <?php if (!isset($_GET['id'])) {
+                        <input class="admin__inp form-control" type="text" name="subtitle1" value="<?php echo $subtitle1 ?>" placeholder="Subtitle1" required>
+
+                        <input class="admin__inp form-control" type="text" name="subtitle2" value="<?php echo $subtitle2 ?>" placeholder="Subtitle2" required>
+
+                        <input class="admin__inp form-control" type="file" name="img1" <?php if (!isset($_GET['id'])) {
                                                                                             echo 'required';
                                                                                         } ?>>
 
-                        <input type="hidden" name="img" value="<?php echo $img ?>">
+                        <input class="admin__inp form-control" type="file" name="img2" <?php if (!isset($_GET['id'])) {
+                                                                                            echo 'required';
+                                                                                        } ?>>
+
+                        <input type="hidden" name="img1" value="<?php echo $img1 ?>">
+                        <input type="hidden" name="img2" value="<?php echo $img2 ?>">
                     </div>
                     <div>
-                        <button class="btn custom-btn admin__form_btn">Add Food Categories</button>
+                        <button class="btn custom-btn admin__form_btn">Add Chef</button>
                     </div>
                 </form>
             </div>

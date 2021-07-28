@@ -2,14 +2,17 @@
 
 require_once "../../db.php";
 
-$id = $_GET["id"];
+$name = $_POST["name"];
 
-$query = "DELETE FROM food_blog WHERE id='$id'";
+
+$query = "INSERT INTO tags (name) VALUES ('$name')";
+
 $result = mysqli_query($mysqli, $query);
+
 
 if(!$result){
     echo mysqli_error($mysqli);
 }
 else{
-    header("Location: ../blogGrid.php");
+    header("Location: ../tags.php");
 }

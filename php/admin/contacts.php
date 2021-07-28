@@ -32,7 +32,7 @@
 
     <div class="admin">
         <?php
-        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "#"];
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "#", "booking.php", "homeSection.php", "tags.php", "tags.php"];
         require_once "../../components/adminFoodNav.php";
         ?>
 

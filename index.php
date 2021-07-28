@@ -28,8 +28,14 @@
 
 <body>
     <?php
-    $headerArr = ["active", "", "", "", "", "", "", "", "", "", ""];
-    require_once "./components/header.php" ?>
+    require_once "./php/db.php";
+    $headerArr = ["active", "", "", "", "", "", "", ""];
+    require_once "./components/header.php";
+
+    $query = "SELECT * FROM home";
+    $result = mysqli_query($mysqli, $query);
+    $row = mysqli_fetch_assoc($result);
+    ?>
 
     <!-- Carousel Start -->
     <div class="carousel">
@@ -37,52 +43,32 @@
             <div class="owl-carousel">
                 <div class="carousel-item">
                     <div class="carousel-img">
-                        <img src="img/carousel-1.jpg" alt="Image">
+                        <img src="img/home/<?php echo $row['img1']; ?>" alt="<?php echo $row['img1']; ?>">
                     </div>
                     <div class="carousel-text">
-                        <h1>Best <span>Quality</span> Ingredients</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat at lectus in malesuada
-                        </p>
+                        <h1><?php echo $row['title1']; ?></h1>
+                        <p><?php echo $row['subtitle1']; ?></p>
                         <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">View Menu</a>
-                            <a class="btn custom-btn" href="">Book Table</a>
+                            <a class="btn custom-btn" href="menu.php">View Menu</a>
+                            <a class="btn custom-btn" href="booking.php">Book Table</a>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="carousel-img">
-                        <img src="img/carousel-2.jpg" alt="Image">
+                        <img src="img/home/<?php echo $row['img2']; ?>" alt="<?php echo $row['img2']; ?>">
                     </div>
                     <div class="carousel-text">
-                        <h1>World’s <span>Best</span> Chef</h1>
-                        <p>
-                            Morbi sagittis turpis id suscipit feugiat. Suspendisse eu augue urna. Morbi sagittis, orci sodales varius fermentum, tortor
-                        </p>
+                        <h1><?php echo $row['title2']; ?></h1>
+                        <p><?php echo $row['subtitle2']; ?></p>
                         <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">View Menu</a>
-                            <a class="btn custom-btn" href="">Book Table</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="carousel-img">
-                        <img src="img/carousel-3.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-text">
-                        <h1>Fastest Order <span>Delivery</span></h1>
-                        <p>
-                            Sed ultrices, est eget feugiat accumsan, dui nibh egestas tortor, ut rhoncus nibh ligula euismod quam. Proin pellentesque odio
-                        </p>
-                        <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">View Menu</a>
-                            <a class="btn custom-btn" href="">Book Table</a>
+                            <a class="btn custom-btn" href="menu.php">View Menu</a>
+                            <a class="btn custom-btn" href="booking.php">Book Table</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </?>
         <!-- Carousel End -->
 
 
@@ -134,38 +120,18 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="input-group date" id="date" name="date" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Date" data-target="#date" data-toggle="datetimepicker" />
+                                    <div class="input-group date" id="date" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" name="date" placeholder="Date" data-target="#date" data-toggle="datetimepicker" required="required" />
                                         <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="input-group time" id="time" name="time" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Time" data-target="#time" data-toggle="datetimepicker" />
+                                    <div class="input-group time" id="time" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" name="time" placeholder="Time" data-target="#time" data-toggle="datetimepicker" required="required" />
                                         <div class="input-group-append" data-target="#time" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <div class="input-group">
-                                        <select name="guest" class="custom-select form-control">
-                                            <option selected>Guest</option>
-                                            <option value="1">1 Guest</option>
-                                            <option value="2">2 Guest</option>
-                                            <option value="3">3 Guest</option>
-                                            <option value="4">4 Guest</option>
-                                            <option value="5">5 Guest</option>
-                                            <option value="6">6 Guest</option>
-                                            <option value="7">7 Guest</option>
-                                            <option value="8">8 Guest</option>
-                                            <option value="9">9 Guest</option>
-                                            <option value="10">10 Guest</option>
-                                        </select>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text"><i class="fa fa-chevron-down"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -341,7 +307,6 @@
                 <div class="row align-items-center">
                     <?php
 
-                    require_once "./php/db.php";
                     $query = "SELECT * FROM food_categories";
                     $result = mysqli_query($mysqli, $query);
 
@@ -354,7 +319,7 @@
                                 </div>
                                 <h2><?php echo $row['name']; ?></h2>
                                 <p><?php echo $row['info']; ?></p>
-                                <a href="./menu.php">View Menu</a>
+                                <a href="./menu.php#menu">View Menu</a>
                             </div>
                         </div>
                     <?php } ?>
@@ -639,9 +604,12 @@
                     <?php
 
                     require_once "./php/db.php";
-                    $query = "SELECT id, title1, info1, img, categories, comments, date FROM food_blog LIMIT 2";
+                    $query = "SELECT id, title1, info1, img, categories, date FROM food_blog LIMIT 2";
                     $result = mysqli_query($mysqli, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $query1 = "SELECT id FROM comment WHERE blog_id = '" . $row["id"] . "'";
+                        $result1 = mysqli_query($mysqli, $query1);
+                        $count = mysqli_num_rows($result1);
                     ?>
                         <div class="col-md-6">
                             <div class="blog-item">
@@ -653,7 +621,7 @@
                                     <div class="blog-meta">
                                         <p><i class="far fa-list-alt"></i><?php echo $row['categories'] ?></p>
                                         <p><i class="far fa-calendar-alt"></i><?php echo $row['date'] ?></p>
-                                        <p><i class="far fa-comments"></i><?php echo $row['comments'] ?></p>
+                                        <p><i class="far fa-comments"></i><?php echo $count ?></p>
                                     </div>
                                     <div class="blog-text">
                                         <p><?php echo $row['info1'] ?></p>

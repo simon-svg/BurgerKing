@@ -28,7 +28,7 @@
 
 <body>
     <?php
-    $headerArr = ["", "", "", "", "", "active", "", "", "", "", ""];
+    $headerArr = ["", "", "", "", "", "active", "", ""];
     require_once "./components/header.php" ?>
 
     <?php
@@ -58,10 +58,10 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="booking-form">
-                        <form>
+                        <form action="./php/booking.php" method="POST">
                             <div class="control-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Name" required="required" />
+                                    <input type="text" class="form-control" name="name" placeholder="Name" required="required" />
                                     <div class="input-group-append">
                                         <div class="input-group-text"><i class="far fa-user"></i></div>
                                     </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="input-group">
-                                    <input type="email" class="form-control" placeholder="Email" required="required" />
+                                    <input type="email" class="form-control" name="email" placeholder="Email" required="required" />
                                     <div class="input-group-append">
                                         <div class="input-group-text"><i class="far fa-envelope"></i></div>
                                     </div>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Mobile" required="required" />
+                                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" required="required" />
                                     <div class="input-group-append">
                                         <div class="input-group-text"><i class="fa fa-mobile-alt"></i></div>
                                     </div>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="input-group date" id="date" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" placeholder="Date" data-target="#date" data-toggle="datetimepicker" />
+                                    <input type="text" class="form-control datetimepicker-input" name="date" placeholder="Date" data-target="#date" data-toggle="datetimepicker" required="required" />
                                     <div class="input-group-append" data-target="#date" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                     </div>
@@ -93,29 +93,9 @@
                             </div>
                             <div class="control-group">
                                 <div class="input-group time" id="time" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" placeholder="Time" data-target="#time" data-toggle="datetimepicker" />
+                                    <input type="text" class="form-control datetimepicker-input" name="time" placeholder="Time" data-target="#time" data-toggle="datetimepicker" required="required" />
                                     <div class="input-group-append" data-target="#time" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="input-group">
-                                    <select class="custom-select form-control">
-                                        <option selected>Guest</option>
-                                        <option value="1">1 Guest</option>
-                                        <option value="2">2 Guest</option>
-                                        <option value="3">3 Guest</option>
-                                        <option value="4">4 Guest</option>
-                                        <option value="5">5 Guest</option>
-                                        <option value="6">6 Guest</option>
-                                        <option value="7">7 Guest</option>
-                                        <option value="8">8 Guest</option>
-                                        <option value="9">9 Guest</option>
-                                        <option value="10">10 Guest</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text"><i class="fa fa-chevron-down"></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +148,11 @@
                                         <div class="menu-text">
                                             <h3>
                                                 <span><?php echo $row['name'] ?></span>
-                                                <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                <strong>$<?php if ($row['discPrice']) {
+                                                                echo $row['discPrice'];
+                                                            } else {
+                                                                echo $row['price'];
+                                                            } ?></strong>
                                             </h3>
                                             <p><?php echo $row['info'] ?></p>
                                         </div>
@@ -183,7 +167,7 @@
                     <div id="snacks" class="container tab-pane fade">
                         <div class="row">
                             <div class="col-lg-7 col-md-12">
-                            <?php
+                                <?php
                                 $snacks = "SELECT * FROM all_foods WHERE categories_id = 2";
                                 $result = mysqli_query($mysqli, $snacks);
 
@@ -196,7 +180,11 @@
                                         <div class="menu-text">
                                             <h3>
                                                 <span><?php echo $row['name'] ?></span>
-                                                <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                <strong>$<?php if ($row['discPrice']) {
+                                                                echo $row['discPrice'];
+                                                            } else {
+                                                                echo $row['price'];
+                                                            } ?></strong>
                                             </h3>
                                             <p><?php echo $row['info'] ?></p>
                                         </div>
@@ -211,7 +199,7 @@
                     <div id="beverages" class="container tab-pane fade">
                         <div class="row">
                             <div class="col-lg-7 col-md-12">
-                            <?php
+                                <?php
                                 $beverages = "SELECT * FROM all_foods WHERE categories_id = 3";
                                 $result = mysqli_query($mysqli, $beverages);
 
@@ -224,7 +212,11 @@
                                         <div class="menu-text">
                                             <h3>
                                                 <span><?php echo $row['name'] ?></span>
-                                                <strong>$<?php if($row['discPrice']){echo $row['discPrice'];}else{echo $row['price'];} ?></strong>
+                                                <strong>$<?php if ($row['discPrice']) {
+                                                                echo $row['discPrice'];
+                                                            } else {
+                                                                echo $row['price'];
+                                                            } ?></strong>
                                             </h3>
                                             <p><?php echo $row['info'] ?></p>
                                         </div>

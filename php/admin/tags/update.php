@@ -3,15 +3,14 @@
 require_once "../../db.php";
 
 $name = $_POST["name"];
+$id = $_GET["id"];
 
-$query = "INSERT INTO header_parent (name) VALUES ('$name')";
 
+$query = "UPDATE tags SET name='$name' WHERE id='$id'";
 $result = mysqli_query($mysqli, $query);
 
-
-if(!$result){
+if (!$result) {
     echo mysqli_error($mysqli);
-}
-else{
-    header("Location: ../index.php");
+} else {
+    header("Location: ../tags.php");
 }

@@ -9,8 +9,8 @@ $info1 = $_POST["info1"];
 $info2 = $_POST["info2"];
 $info3 = $_POST["info3"];
 $categories = $_POST["categories"];
-$comments = $_POST["comments"];
 $img = $_POST["img"];
+$text = $_POST["text"];
 $id = $_GET["id"];
 $date = time();
 
@@ -30,12 +30,12 @@ foreach ($_FILES as $key => $file) {
 }
 
 $query = "UPDATE food_blog SET title1='$title1', title2='$title2', title3='$title3', info1='$info1', info2='$info2', info3='$info3',
-img='$img', categories='$categories', comments='$comments', date='$date' WHERE id='$id'";
+img='$img', categories='$categories', date='$date', tag='$text' WHERE id='$id'";
 
 $result = mysqli_query($mysqli, $query);
 
 if (!$result) {
     echo mysqli_error($mysqli);
 } else {
-    header("Location: ../index.php");
+    header("Location: ../blogGrid.php");
 }

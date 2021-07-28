@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 19 2021 г., 11:54
+-- Время создания: Июл 28 2021 г., 09:40
 -- Версия сервера: 10.3.13-MariaDB
 -- Версия PHP: 7.1.22
 
@@ -62,6 +62,28 @@ INSERT INTO `all_foods` (`id`, `name`, `info`, `img`, `price`, `discPrice`, `cat
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `booking`
+--
+
+CREATE TABLE `booking` (
+  `id` int(16) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `mobile` int(128) NOT NULL,
+  `date` varchar(128) NOT NULL,
+  `time` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `booking`
+--
+
+INSERT INTO `booking` (`id`, `name`, `email`, `mobile`, `date`, `time`) VALUES
+(5, 'Simon Karapetyan', 'simonkarapetyan604@gmail.com', 55321413, '07/22/2021', '11:56 AM');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `chefs`
 --
 
@@ -109,6 +131,35 @@ INSERT INTO `clients` (`id`, `name`, `profession`, `info`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(16) NOT NULL,
+  `parent_id` int(16) NOT NULL,
+  `blog_id` int(16) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `last_name` varchar(256) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `message` text NOT NULL,
+  `date` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `comment`
+--
+
+INSERT INTO `comment` (`id`, `parent_id`, `blog_id`, `name`, `last_name`, `email`, `message`, `date`) VALUES
+(6, 0, 3, 'simon', 'rfghrhh', 'gor_stepanyan99@mail.ru', 'rthrthrth', 1627123705),
+(7, 0, 3, 'hrthrthrt', 'wergrfg', 'cargoguarantee@mail.ru', 'erhrtjrterh', 1627123721),
+(8, 7, 3, 'tutryt', 'dgrge', 'gor_stepanyan99@mail.ru', 'tyjtyjty', 1627124740),
+(11, 6, 3, 'vardan', 'dewfefrgrgtg', 'simonkarapetyan605@gmail.com', 'ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 1627234413),
+(13, 7, 3, 'f e', 'ssssssssssssssssss', 'safsaffsa@sfaafd.sa', 'sssssssssssssssssssssssssssssssssssssssssssswfergrthrthehsssssssssssssssssssssssssssssssssssssssssssswfergrthrthehsssssssssssssssssssssssssssssssssssssssssssswfergrthrthehsssssssssssssssssssssssssssssssssssssssssssswfergrthrthehsssssssssssssssssssssssssssssssssssssssssssswfergrthrthehsssssssssssssssssssssssssssssssssssssssssssswfergrthrtheh', 1627235094),
+(16, 6, 3, 'simon', 'gggggggggggggg', 'gayane.harutyunyan.777@mail.ru', 'tttttttttttttttttttttttt', 1627403120);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `contact`
 --
 
@@ -144,18 +195,18 @@ CREATE TABLE `food_blog` (
   `img` varchar(128) NOT NULL,
   `categories` varchar(128) NOT NULL,
   `date` int(32) NOT NULL,
-  `comments` int(16) NOT NULL
+  `tag` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `food_blog`
 --
 
-INSERT INTO `food_blog` (`id`, `title1`, `title2`, `title3`, `info1`, `info2`, `info3`, `img`, `categories`, `date`, `comments`) VALUES
-(1, 'Lorem ipsum dolor sit amet', 'dolor sit amet Lorem ipsum ', 'ipsum Lorem dolor sit amet', 'Mauris eu pulvinar tellus, eu luctus nisl. Pellentesque suscipit mi eu varius pulvinar. Aenean vulputate, massa eget elementum finibus, ipsum arcu commodo est, ut mattis eros orci ac risus. Suspendisse ornare, massa in feugiat facilisis, eros nisl auctor lacus, laoreet tempus elit dolor eu lorem. Nunc a arcu suscipit, suscipit quam quis, semper augue.', 'Mauris quis arcu finibus, posuere dolor eu, viverra felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In porta, ex vitae accumsan facilisis, nisi tellus dictum metus, quis fringilla dui tellus in tellus. Praesent pharetra orci at vehicula posuere. Sed molestie fringilla lorem, vel imperdiet tortor blandit at. Quisque non ultrices lorem, eget rhoncus orci. Fusce porttitor placerat diam et mattis. Nam laoreet, ex eu posuere sollicitudin, sem tortor pellentesque ipsum, quis mattis purus lectus ut lacus. Integer eu risus ac est interdum scelerisque.', 'Nam sodales scelerisque nunc sed convallis. Vestibulum facilisis porta erat, sit amet pharetra tortor blandit id. Nunc velit tellus, consectetur sed convallis in, tincidunt finibus nulla. Integer vel ex in mauris tincidunt tincidunt nec sed elit. Etiam pretium lectus lectus, sed aliquet erat tristique euismod. Praesent faucibus nisl augue, ac tempus libero pellentesque malesuada. Vivamus iaculis imperdiet laoreet. Aliquam vel felis felis. Proin sed sapien erat. Etiam a quam et metus tempor rutrum. Curabitur in faucibus justo. Etiam imperdiet iaculis urna.', '42167294.jpeg', 'food', 1626680645, 10),
-(2, 'ipsum Lorem dolor sit amet', 'Ldolor orem ipsum sit amet', 'sit lorem ipsum dolor amet', 'Mauris eu pulvinar tellus, eu luctus nisl. Pellentesque suscipit mi eu varius pulvinar. Aenean vulputate, massa eget elementum finibus, ipsum arcu commodo est, ut mattis eros orci ac risus. Suspendisse ornare, massa in feugiat facilisis, eros nisl auctor lacus, laoreet tempus elit dolor eu lorem. Nunc a arcu suscipit, suscipit quam quis, semper augue', 'Vestibulum sit amet ullamcorper sem. Integer hendrerit elit eget purus sodales maximus. Quisque ac nulla arcu. Morbi venenatis arcu ac arcu cursus pharetra. Morbi sit amet viverra augue, ac ultricies libero. Praesent elementum lectus mi, eu elementum urna venenatis sed. Donec auctor purus ut mattis feugiat. Integer mi erat, consectetur sed tincidunt vitae, sagittis elementum libero. Vivamus a mauris consequat, hendrerit lectus in, fermentum libero. Integer mattis bibendum neque et porttitor.', 'Praesent ultricies, mauris eget vestibulum viverra, neque lorem malesuada mauris, eget rhoncus lectus enim a lorem. Vivamus at vehicula risus, eget facilisis massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et posuere sapien. Fusce bibendum lorem sem, quis tincidunt felis mattis nec.', '53432620.jpeg', 'food', 1626681021, 15),
-(3, 'sit Lorem ipsum dolor amet', 'amet dolor sit Lorem ipsum ', 'Lorem dolor sit ametipsum ', 'vulputate, massa eget elementum finibus, ipsum arcu commodo est, ut mattis eros orci ac risus. Suspendisse ornare, massa in feugiat facilisis, eros nisl auctor lacus, laoreet tempus elit dolor eu lorem. Nunc a arcu suscipit, suscipit quam quis, semper augue.\r\n\r\nQuisque arcu nulla, convallis nec orci vel, suscipit elementum odio. Curabitur volutpat velit non diam tincidunt sodales. Nullam sapien libero, bibendum nec viverra in, iaculis ut eros.', 'Donec auctor purus ut mattis feugiat. Integer mi erat, consectetur sed tincidunt vitae, sagittis elementum libero. Vivamus a mauris consequat, hendrerit lectus in, fermentum libero. Integer mattis bibendum neque et porttitor.\r\n\r\nMauris quis arcu finibus, posuere dolor eu, viverra felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In porta, ex vitae accumsan facilisis, nisi tellus dictum metus, ', 'rhoncus lectus enim a lorem. Vivamus at vehicula risus, eget facilisis massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et posuere sapien. Fusce bibendum lorem sem, quis tincidunt felis mattis nec.\r\n\r\nProin vel nulla purus. Nunc nec eros in nisi efficitur rutrum quis sed eros. Mauris felis dolor, rhoncus eget gravida vitae, pretium vel arcu. Cras blandit tellus eget tellus dictum venenatis. Sed ultricies bibendum dictum. Etiam facilisis erat id turpis tincidunt malesuada. Duis bibendum sapien ', '56241699.jpeg', 'food', 1626681144, 12),
-(4, 'ipsum Lorem dolor sit amet', 'dolor sit amet Lorem ipsum ', 'Lorem dolor sit ametipsum ', 'bibendum, augue purus mollis sapien, non rhoncus eros leo in nunc. Donec a nulla vel turpis consectetur tempor ac vel justo. In hac habitasse platea dictumst. Cras nec sollicitudin eros. Nunc eu enim non turpis sagittis rhoncus consectetur id augue. Mauris dignissim neque felis. Phasellus mollis mi a pharetra cursus', 'magnis dis parturient montes, nascetur ridiculus mus. In porta, ex vitae accumsan facilisis, nisi tellus dictum metus, quis fringilla dui tellus in tellus. Praesent pharetra orci at vehicula posuere. Sed molestie fringilla lorem, vel imperdiet tortor blandit at. Quisque non ultrices lorem, eget rhoncus orci. Fusce porttitor placerat diam et mattis. Nam laoreet, ex eu posuere sollicitudin, sem', 'rhoncus lectus enim a lorem. Vivamus at vehicula risus, eget facilisis massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et posuere sapien. Fusce bibendum lorem sem, quis tincidunt felis mattis nec.\r\n\r\nProin vel nulla purus. Nunc nec eros in nisi efficitur rutrum quis sed eros. Mauris felis dolor, rhoncus eget gravida vitae, pretium vel arcu. Cras blandit tellus eget tellus dictum venenatis. Sed ultricies', '70070653.jpeg', 'food', 1626681199, 13);
+INSERT INTO `food_blog` (`id`, `title1`, `title2`, `title3`, `info1`, `info2`, `info3`, `img`, `categories`, `date`, `tag`) VALUES
+(1, 'Lorem ipsum dolor sit amet', 'dolor sit amet Lorem ipsum ', 'ipsum Lorem dolor sit amet', 'Mauris eu pulvinar tellus, eu luctus nisl. Pellentesque suscipit mi eu varius pulvinar. Aenean vulputate, massa eget elementum finibus, ipsum arcu commodo est, ut mattis eros orci ac risus. Suspendisse ornare, massa in feugiat facilisis, eros nisl auctor lacus, laoreet tempus elit dolor eu lorem. Nunc a arcu suscipit, suscipit quam quis, semper augue.', 'Mauris quis arcu finibus, posuere dolor eu, viverra felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In porta, ex vitae accumsan facilisis, nisi tellus dictum metus, quis fringilla dui tellus in tellus. Praesent pharetra orci at vehicula posuere. Sed molestie fringilla lorem, vel imperdiet tortor blandit at. Quisque non ultrices lorem, eget rhoncus orci. Fusce porttitor placerat diam et mattis. Nam laoreet, ex eu posuere sollicitudin, sem tortor pellentesque ipsum, quis mattis purus lectus ut lacus. Integer eu risus ac est interdum scelerisque.', 'Nam sodales scelerisque nunc sed convallis. Vestibulum facilisis porta erat, sit amet pharetra tortor blandit id. Nunc velit tellus, consectetur sed convallis in, tincidunt finibus nulla. Integer vel ex in mauris tincidunt tincidunt nec sed elit. Etiam pretium lectus lectus, sed aliquet erat tristique euismod. Praesent faucibus nisl augue, ac tempus libero pellentesque malesuada. Vivamus iaculis imperdiet laoreet. Aliquam vel felis felis. Proin sed sapien erat. Etiam a quam et metus tempor rutrum. Curabitur in faucibus justo. Etiam imperdiet iaculis urna.', '42167294.jpeg', 'food', 1626680645, 'International, Trades'),
+(2, 'ipsum Lorem dolor sit amet', 'Ldolor orem ipsum sit amet', 'sit lorem ipsum dolor amet', 'Mauris eu pulvinar tellus, eu luctus nisl. Pellentesque suscipit mi eu varius pulvinar. Aenean vulputate, massa eget elementum finibus, ipsum arcu commodo est, ut mattis eros orci ac risus. Suspendisse ornare, massa in feugiat facilisis, eros nisl auctor lacus, laoreet tempus elit dolor eu lorem. Nunc a arcu suscipit, suscipit quam quis, semper augue', 'Vestibulum sit amet ullamcorper sem. Integer hendrerit elit eget purus sodales maximus. Quisque ac nulla arcu. Morbi venenatis arcu ac arcu cursus pharetra. Morbi sit amet viverra augue, ac ultricies libero. Praesent elementum lectus mi, eu elementum urna venenatis sed. Donec auctor purus ut mattis feugiat. Integer mi erat, consectetur sed tincidunt vitae, sagittis elementum libero. Vivamus a mauris consequat, hendrerit lectus in, fermentum libero. Integer mattis bibendum neque et porttitor.', 'Praesent ultricies, mauris eget vestibulum viverra, neque lorem malesuada mauris, eget rhoncus lectus enim a lorem. Vivamus at vehicula risus, eget facilisis massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et posuere sapien. Fusce bibendum lorem sem, quis tincidunt felis mattis nec.', '53432620.jpeg', 'food', 1626681021, 'Lifestyle, Economics, International'),
+(3, 'sit Lorem ipsum dolor amet', 'amet dolor sit Lorem ipsum ', 'Lorem dolor sit ametipsum ', 'vulputate, massa eget elementum finibus, ipsum arcu commodo est, ut mattis eros orci ac risus. Suspendisse ornare, massa in feugiat facilisis, eros nisl auctor lacus, laoreet tempus elit dolor eu lorem. Nunc a arcu suscipit, suscipit quam quis, semper augue.\r\n\r\nQuisque arcu nulla, convallis nec orci vel, suscipit elementum odio. Curabitur volutpat velit non diam tincidunt sodales. Nullam sapien libero, bibendum nec viverra in, iaculis ut eros.', 'Donec auctor purus ut mattis feugiat. Integer mi erat, consectetur sed tincidunt vitae, sagittis elementum libero. Vivamus a mauris consequat, hendrerit lectus in, fermentum libero. Integer mattis bibendum neque et porttitor.\r\n\r\nMauris quis arcu finibus, posuere dolor eu, viverra felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In porta, ex vitae accumsan facilisis, nisi tellus dictum metus, ', 'rhoncus lectus enim a lorem. Vivamus at vehicula risus, eget facilisis massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et posuere sapien. Fusce bibendum lorem sem, quis tincidunt felis mattis nec.\r\n\r\nProin vel nulla purus. Nunc nec eros in nisi efficitur rutrum quis sed eros. Mauris felis dolor, rhoncus eget gravida vitae, pretium vel arcu. Cras blandit tellus eget tellus dictum venenatis. Sed ultricies bibendum dictum. Etiam facilisis erat id turpis tincidunt malesuada. Duis bibendum sapien ', '56241699.jpeg', 'food', 1626681144, 'National, Trades, International'),
+(4, 'ipsum Lorem dolor sit amet', 'dolor sit amet Lorem ipsum ', 'Lorem dolor sit ametipsum ', 'bibendum, augue purus mollis sapien, non rhoncus eros leo in nunc. Donec a nulla vel turpis consectetur tempor ac vel justo. In hac habitasse platea dictumst. Cras nec sollicitudin eros. Nunc eu enim non turpis sagittis rhoncus consectetur id augue. Mauris dignissim neque felis. Phasellus mollis mi a pharetra cursus', 'magnis dis parturient montes, nascetur ridiculus mus. In porta, ex vitae accumsan facilisis, nisi tellus dictum metus, quis fringilla dui tellus in tellus. Praesent pharetra orci at vehicula posuere. Sed molestie fringilla lorem, vel imperdiet tortor blandit at. Quisque non ultrices lorem, eget rhoncus orci. Fusce porttitor placerat diam et mattis. Nam laoreet, ex eu posuere sollicitudin, sem', 'rhoncus lectus enim a lorem. Vivamus at vehicula risus, eget facilisis massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et posuere sapien. Fusce bibendum lorem sem, quis tincidunt felis mattis nec.\r\n\r\nProin vel nulla purus. Nunc nec eros in nisi efficitur rutrum quis sed eros. Mauris felis dolor, rhoncus eget gravida vitae, pretium vel arcu. Cras blandit tellus eget tellus dictum venenatis. Sed ultricies', '70070653.jpeg', 'food', 1626681199, 'Politics, Technology, Economics');
 
 -- --------------------------------------------------------
 
@@ -203,10 +254,75 @@ INSERT INTO `header_list` (`id`, `parent_id`, `name`, `link`) VALUES
 (4, 0, 'chef', 'team.php'),
 (5, 0, 'menu', 'menu.php'),
 (6, 0, 'booking', 'booking.php'),
-(7, 0, 'pages', '#'),
 (11, 7, 'blog grid', 'blog.php'),
 (12, 7, 'blog detail', 'single.php'),
 (13, 0, 'contact', 'contact.php');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `home`
+--
+
+CREATE TABLE `home` (
+  `id` int(16) NOT NULL,
+  `title1` varchar(256) NOT NULL,
+  `title2` varchar(256) NOT NULL,
+  `subtitle1` text NOT NULL,
+  `subtitle2` text NOT NULL,
+  `img1` varchar(128) NOT NULL,
+  `img2` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `home`
+--
+
+INSERT INTO `home` (`id`, `title1`, `title2`, `subtitle1`, `subtitle2`, `img1`, `img2`) VALUES
+(1, 'Best Quality Ingredients', 'Worlds Best Chefs', 'Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat at lectus in malesuada', 'Consequat at lectus in malesuada Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac', '35941721.jpeg', '94020349.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `subscribe`
+--
+
+CREATE TABLE `subscribe` (
+  `id` int(16) NOT NULL,
+  `email` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `subscribe`
+--
+
+INSERT INTO `subscribe` (`id`, `email`) VALUES
+(1, 'simonkarapetyan605@gmail.com'),
+(7, 'simon.karapetyan.2000@mail.ru');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` int(16) NOT NULL,
+  `name` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`) VALUES
+(1, 'National'),
+(2, 'International'),
+(3, 'Economics'),
+(4, 'Politics'),
+(5, 'Lifestyle'),
+(6, 'Technolog'),
+(7, 'Trades');
 
 -- --------------------------------------------------------
 
@@ -241,6 +357,12 @@ ALTER TABLE `all_foods`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `chefs`
 --
 ALTER TABLE `chefs`
@@ -250,6 +372,12 @@ ALTER TABLE `chefs`
 -- Индексы таблицы `clients`
 --
 ALTER TABLE `clients`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `comment`
+--
+ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -277,6 +405,24 @@ ALTER TABLE `header_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `home`
+--
+ALTER TABLE `home`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `subscribe`
+--
+ALTER TABLE `subscribe`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -293,6 +439,12 @@ ALTER TABLE `all_foods`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT для таблицы `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `chefs`
 --
 ALTER TABLE `chefs`
@@ -305,16 +457,22 @@ ALTER TABLE `clients`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT для таблицы `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `food_blog`
 --
 ALTER TABLE `food_blog`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `food_categories`
@@ -327,6 +485,24 @@ ALTER TABLE `food_categories`
 --
 ALTER TABLE `header_list`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT для таблицы `home`
+--
+ALTER TABLE `home`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `subscribe`
+--
+ALTER TABLE `subscribe`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT для таблицы `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

@@ -1587,6 +1587,10 @@ a:focus {
 .single .comment-form textarea {
     border-radius: 5px;
 }
+.comments__message{
+    width: 100%;
+    word-break: break-all;
+}
 
 
 /**********************************/
@@ -1735,6 +1739,7 @@ a:focus {
     padding: 7px 15px;
     font-size: 14px;
     font-weight: 400;
+    text-transform: capitalize;
     color: #fbaf32;
     border: 1px solid #dddddd;
     border-radius: 5px;
@@ -1997,6 +2002,10 @@ a:focus {
 
 .footer .copyright p a:hover {
     color: #719a0a;
+}
+.subscribe__success i{
+    color: #fbaf32;
+    font-size: 30px;
 }
 
 

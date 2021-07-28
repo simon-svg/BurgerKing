@@ -37,5 +37,14 @@
         <li>
             <a class="admin__item" href="<?php echo $navArr[5]; ?>">Contacts</a>
         </li>
+        <li>
+            <a class="admin__item" href="<?php echo $navArr[6]; ?>">Booking</a>
+        </li>
+        <li>
+            <a class="admin__item" href="<?php echo $navArr[7]; ?>">Home</a>
+        </li>
+        <li>
+            <a class="admin__item" href="<?php echo $navArr[8]; ?>">Tags</a>
+        </li>
     </ul>
 </nav>

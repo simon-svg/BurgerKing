@@ -32,7 +32,7 @@
 
     <div class="admin">
         <?php
-        $navArr = ["index.php", "chefs.php", "foodCategories.php", "#", "blogGrid.php", "contacts.php"];
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "#", "blogGrid.php", "contacts.php", "booking.php", "homeSection.php", "tags.php"];
         require_once "../../components/adminFoodNav.php";
         ?>
 
@@ -138,7 +138,7 @@
 
                             <input class="admin__inp admin__inp_food form-control" type="number" name="discPrice" value="<?php echo $discPrice; ?>" placeholder="Discount Price">
 
-                            <select name="categoriesId" id="categoriesId" name="categoriesId">
+                            <select name="categoriesId" id="categoriesId">
                                 <?php
                                 $query = 'SELECT * FROM food_categories';
                                 $result = mysqli_query($mysqli, $query);

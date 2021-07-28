@@ -17,5 +17,5 @@ if(!$result){
     echo mysqli_error($mysqli);
 }
 else{
-    header("Location: ../index.php");
+    header("Location: ../contacts.php");
 }

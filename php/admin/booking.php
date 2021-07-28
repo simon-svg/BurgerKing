@@ -32,100 +32,58 @@
 
     <div class="admin">
         <?php
-        $navArr = ["#", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "contacts.php", "booking.php", "homeSection.php", "tags.php"];
+        $navArr = ["index.php", "chefs.php", "foodCategories.php", "allFoods.php", "blogGrid.php", "contacts.php", "#", "homeSection.php", "tags.php"];
         require_once "../../components/adminFoodNav.php";
         ?>
 
-        <!-- ---------------------------------- HEADER MENUE LIST ----------------------------------------------- -->
+        <!-- ---------------------------------- BOOKING ----------------------------------------------- -->
 
         <div class="admin__section admin__section_header-list">
             <div class="admin__section_head">
-                <h3 class="admin__section_title">header menu list</h3>
+                <h3 class="admin__section_title">Booking</h3>
             </div>
             <div class="admin__section_content">
                 <div class="admin__contact">
                     <table class="admin__table">
                         <tr>
-                            <th class="admin__table_title">id</th>
-                            <th class="admin__table_title">parentId</th>
                             <th class="admin__table_title">name</th>
-                            <th class="admin__table_title">link</th>
+                            <th class="admin__table_title">email</th>
+                            <th class="admin__table_title">mobile</th>
+                            <th class="admin__table_title">date</th>
+                            <th class="admin__table_title">time</th>
                             <th class="admin__table_title">panel</th>
                         </tr>
                         <?php
-                        $query = "SELECT * FROM header_list";
+                        $query = "SELECT * FROM booking";
                         $result = mysqli_query($mysqli, $query);
 
                         while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                             <tr class="admin__section_item">
                                 <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['id'] ?></h3>
-                                </td>
-                                <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['parent_id'] ?></h3>
-                                </td>
-                                <td class="admin__section_item_td">
                                     <h3 class="admin__section_item_name"><?php echo $row['name'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_pos"><?php echo $row['link'] ?></h3>
+                                    <h3 class="admin__section_item_name"><?php echo $row['email'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
-                                    <a href="?id=<?php echo $row["id"] ?>">
-                                        <i class="example__class admin__icon fas fa-pencil-alt"></i>
-                                    </a>
-                                    <a href="./headerList/remove.php?id=<?php echo $row["id"] ?>">
+                                    <h3 class="admin__section_item_pos"><?php echo $row['mobile'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_pos"><?php echo $row['date'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <h3 class="admin__section_item_pos"><?php echo $row['time'] ?></h3>
+                                </td>
+                                <td class="admin__section_item_td">
+                                    <a href="./booking/remove.php?id=<?php echo $row["id"] ?>">
                                         <i class="admin__icon fas fa-times"></i>
                                     </a>
                                 </td>
                             </tr>
                         <?php } ?>
-
                     </table>
                 </div>
-                <?php
-
-                $id = '';
-                $parentId = '';
-                $name = '';
-                $link = '';
-
-                if (isset($_GET["id"])) {
-                    $query = 'SELECT * FROM header_list WHERE id = ' . $_GET["id"];
-                    $result = mysqli_query($mysqli, $query);
-
-                    $row = mysqli_fetch_assoc($result);
-                    $id = $row["id"];
-                    $parentId = $row["parent_id"];
-                    $name = $row["name"];
-                    $link = $row["link"];
-                }
-
-                ?>
-                <form class="admin__form"
-                action="<?php if (isset($_GET['id'])) {echo './headerList/update.php?id=' . $id;} else {echo './headerList/insert.php';} ?>"
-                method="POST">
-                    <div class="form__flex">
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
-
-                        <input class="admin__inp admin__inp_header form-control" type="text" name="link" value="<?php echo $link ?>" placeholder="Link" required>
-
-                        <select id="parentId" name="parentId">
-                            <option value="0">no</option>
-                            <?php
-                            $query = 'SELECT * FROM header_list';
-                            $result = mysqli_query($mysqli, $query);
-
-                            while ($row = mysqli_fetch_assoc($result)) { ?>
-                                <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                            <?php }?>
-                        </select>
-                    </div>
-                    <div>
-                        <button class="btn custom-btn admin__form_btn">Add Header Item</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -145,9 +103,6 @@
 
     <!-- Template Javascript -->
     <script src='../../js/admin.js'></script>
-    <script>
-        $('option[value="<?php echo $parentId ?>"]').attr('selected', true);
-    </script>
 </body>
 
 </html>
