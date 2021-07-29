@@ -104,7 +104,7 @@
 
                 ?>
                 <form class="admin__form"
-                action="<?php if (isset($_GET['id'])) {echo './headerList/update.php?id=' . $id;} else {echo './headerList/insert.php';} ?>"
+                action="<?php if (isset($_GET['id'])) {echo './headerList/update.php';} else {echo './headerList/insert.php';} ?>"
                 method="POST">
                     <div class="form__flex">
                         <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
@@ -121,6 +121,8 @@
                                 <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
                             <?php }?>
                         </select>
+
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add Header Item</button>

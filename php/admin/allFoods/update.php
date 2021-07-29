@@ -8,7 +8,7 @@ $price = $_POST["price"];
 $discPrice = $_POST["discPrice"];
 $categoriesId = $_POST["categoriesId"];
 $img = $_POST["img"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 $date = time();
 
 
@@ -34,5 +34,5 @@ $result = mysqli_query($mysqli, $query);
 if (!$result) {
     echo mysqli_error($mysqli);
 } else {
-    header("Location: ../burgers.php");
+    header("Location: ../burgers.php?catId=1");
 }

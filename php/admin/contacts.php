@@ -106,7 +106,7 @@
 
                 ?>
                 <form class="admin__form" action="<?php if (isset($_GET['id'])) {
-                                                        echo './contacts/update.php?id=' . $id;
+                                                        echo './contacts/update.php';
                                                     } else {
                                                         echo './contacts/insert.php';
                                                     } ?>" method="POST">
@@ -118,6 +118,8 @@
                         <input class="admin__inp admin__inp_header form-control" type="text" name="subject" value="<?php echo $subject ?>" placeholder="Subject" required>
 
                         <input class="admin__inp admin__inp_header form-control" type="text" name="message" value="<?php echo $message ?>" placeholder="Message" required>
+
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add contacts</button>

@@ -5,7 +5,7 @@ require_once "../../db.php";
 $name = $_POST["name"];
 $position = $_POST["position"];
 $img = $_POST["img"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 
 foreach ($_FILES as $key => $file) {
     if ($file["error"] == 0) {

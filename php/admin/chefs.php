@@ -102,7 +102,7 @@
 
                 ?>
                 <form class="admin__form" action="<?php if (isset($_GET['id'])) {
-                                                        echo './chefs/update.php?id=' . $id;
+                                                        echo './chefs/update.php';
                                                     } else {
                                                         echo './chefs/insert.php';
                                                     } ?>" method="POST" enctype="multipart/form-data">
@@ -116,6 +116,8 @@
                                                                                         } ?>>
 
                         <input type="hidden" name="img" value="<?php echo $img ?>">
+
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add Chef</button>

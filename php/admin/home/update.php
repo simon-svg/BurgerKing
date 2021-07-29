@@ -8,7 +8,7 @@ $subtitle1 = $_POST["subtitle1"];
 $subtitle2 = $_POST["subtitle2"];
 $img1 = $_POST["img1"];
 $img2 = $_POST["img2"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 
 
 foreach ($_FILES as $key => $file) {
@@ -25,8 +25,7 @@ foreach ($_FILES as $key => $file) {
     }
 }
 
-
-$query = "UPDATE home SET title1='$title1', title2='$title2', subtitle1='$subtitle1', subtitle2='$subtitle2', '$img1', '$img2' WHERE id='$id'";
+$query = "UPDATE home SET title1='$title1', title2='$title2', subtitle1='$subtitle1', subtitle2='$subtitle2', img1 = '$img1', img2 = '$img2' WHERE id='$id'";
 
 
 $result = mysqli_query($mysqli, $query);

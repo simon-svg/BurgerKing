@@ -92,12 +92,14 @@
 
                 ?>
                 <form class="admin__form" action="<?php if (isset($_GET['id'])) {
-                                                        echo './tags/update.php?id=' . $id;
+                                                        echo './tags/update.php';
                                                     } else {
                                                         echo './tags/insert.php';
                                                     } ?>" method="POST">
                     <div class="form__flex">
                         <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
+
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add Tag</button>

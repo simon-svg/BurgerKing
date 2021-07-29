@@ -3,7 +3,7 @@
 require_once "../../db.php";
 
 $name = $_POST["name"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 
 
 $query = "UPDATE tags SET name='$name' WHERE id='$id'";

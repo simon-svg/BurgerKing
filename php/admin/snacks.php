@@ -118,7 +118,7 @@
                     }
                     ?>
                     <form class="admin__form"
-                    action="<?php if (isset($_GET['id'])) {echo './allFoods/update.php?id=' . $id;} else {echo './allFoods/insert.php';} ?>" method="POST" enctype="multipart/form-data">
+                    action="<?php if (isset($_GET['id'])) {echo './allFoods/update.php';} else {echo './allFoods/insert.php';} ?>" method="POST" enctype="multipart/form-data">
                         <div class="form__flex">
                             <input class="admin__inp admin__inp_food form-control" type="text" name="name" placeholder="Name" required value="<?php echo $name ?>">
 
@@ -147,6 +147,8 @@
                             </select>
 
                             <input type="hidden" name="img" value="<?php echo $img ?>">
+
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
                         </div>
                         <div>
                             <button class="btn custom-btn admin__form_btn">Add snack</button>

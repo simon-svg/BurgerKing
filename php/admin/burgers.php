@@ -56,7 +56,7 @@
                                 <th class="admin__table_title">panel</th>
                             </tr>
                             <?php
-                            $query = "SELECT * FROM all_foods WHERE categories_id = $_GET[catId]";
+                            $query = "SELECT * FROM all_foods WHERE categories_id = '" . $_GET['catId'] . "'";
                             $result = mysqli_query($mysqli, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -120,7 +120,7 @@
 
                     ?>
                     <form class="admin__form" action="<?php if (isset($_GET['id'])) {
-                                                            echo './allFoods/update.php?id=' . $id;
+                                                            echo './allFoods/update.php';
                                                         } else {
                                                             echo './allFoods/insert.php';
                                                         } ?>" method="POST" enctype="multipart/form-data">
@@ -147,6 +147,8 @@
                             </select>
 
                             <input type="hidden" name="img" value="<?php echo $img ?>">
+
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
                         </div>
                         <div>
                             <button class="btn custom-btn admin__form_btn">Add Burger</button>

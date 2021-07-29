@@ -51,7 +51,7 @@
                 $tag = isset($_GET['tag']) ? $_GET['tag'] : false;
                 $itemsCount = 2;
                 $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-                $from = ($page - 1) * 2;
+                $from = ($page-1)*$itemsCount;
 
 
                 if ($tag != false) {
@@ -65,6 +65,9 @@
                 $dataCount = ceil(mysqli_num_rows($result2) / 2);
 
                 $result = mysqli_query($mysqli, $query);
+                if(isset($_GET["tag"])){
+                    $tag = $_GET["tag"];
+                }
                 while ($row = mysqli_fetch_assoc($result)) {
                     $newText = $row['tag'];
                     $blogs = explode(",", $newText);
@@ -107,7 +110,7 @@
                                                 } else {
                                                     echo false;
                                                 } ?>">
-                            <a class="page-link" href="?tag=<?php echo $_GET['tag'] ?>&page=<?php echo $page - 1 ?>">Previous</a>
+                            <a class="page-link" href="?tag=<?php echo $tag ?>&page=<?php echo $page - 1 ?>">Previous</a>
                         </li>
                         <?php for ($i = 1; $i <= $dataCount; $i++) { ?>
                             <li class="page-item <?php if ($page == $i) {
@@ -115,7 +118,7 @@
                                                     } else {
                                                         echo false;
                                                     } ?>">
-                                <a class="page-link" href="?tag=<?php echo $_GET['tag'] ?>&page=<?= $i ?>"><?= $i ?></a>
+                                <a class="page-link" href="?tag=<?php echo $tag ?>&page=<?php echo $i ?>"><?php echo $i ?></a>
                             </li>
                         <?php } ?>
                         <li class="page-item <?php if (isset($page) && $page == $dataCount) {
@@ -123,7 +126,7 @@
                                                 } else {
                                                     echo false;
                                                 } ?>">
-                            <a class="page-link" href="?tag=<?php echo $_GET['tag'] ?>&page=<?php echo $page + 1 ?>">Next</a>
+                            <a class="page-link" href="?tag=<?php echo $tag ?>&page=<?php echo $page + 1 ?>">Next</a>
                         </li>
                     </ul>
                 </div>

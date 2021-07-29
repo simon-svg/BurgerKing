@@ -103,7 +103,7 @@
 
                 ?>
                 <form class="admin__form" action="<?php if (isset($_GET['id'])) {
-                                                        echo './foodCategories/update.php?id=' . $id;
+                                                        echo './foodCategories/update.php';
                                                     } else {
                                                         echo './foodCategories/insert.php';
                                                     } ?>" method="POST" enctype="multipart/form-data">
@@ -117,6 +117,8 @@
                                                                                         } ?>>
 
                         <input type="hidden" name="img" value="<?php echo $img ?>">
+                        
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                     <div>
                         <button class="btn custom-btn admin__form_btn">Add Food Categories</button>

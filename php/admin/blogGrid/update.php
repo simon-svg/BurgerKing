@@ -11,7 +11,7 @@ $info3 = $_POST["info3"];
 $categories = $_POST["categories"];
 $img = $_POST["img"];
 $text = $_POST["text"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 $date = time();
 
 

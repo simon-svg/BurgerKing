@@ -3,7 +3,7 @@
 require_once "../../db.php";
 
 $name = $_POST["name"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 $info = $_POST["info"];
 $img = $_POST["img"];
 

@@ -6,7 +6,7 @@ $name = $_POST["name"];
 $email = $_POST["email"];
 $subject = $_POST["subject"];
 $message = $_POST["message"];
-$id = $_GET["id"];
+$id = $_POST["id"];
 
 
 

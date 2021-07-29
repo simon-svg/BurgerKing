@@ -71,12 +71,12 @@
                         $info3 = $row["info3"];
                         $img = $row["img"];
                         $categories = $row["categories"];
-                        $text = $row["text"];
+                        $text = $row["tag"];
                     }
 
                     ?>
                     <form class="admin__form mb-5" action="<?php if (isset($_GET['id'])) {
-                                                            echo './blogGrid/update.php?id=' . $id;
+                                                            echo './blogGrid/update.php';
                                                         } else {
                                                             echo './blogGrid/insert.php';
                                                         } ?>" method="POST" enctype="multipart/form-data">
@@ -104,6 +104,8 @@
                             <input class="admin__inp admin__inp_food form-control" type="text" name="categories" value="<?php echo $categories; ?>" placeholder="Categories" required>
 
                             <input type="hidden" name="img" value="<?php echo $img ?>">
+
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
                         </div>
                         <div>
                             <button class="btn custom-btn admin__form_btn">Add Burger</button>
@@ -158,7 +160,7 @@
                                         <?php echo $row['categories'] ?>
                                     </td>
                                     <td class="admin__section_item_td">
-                                        <?php echo $row['comments'] ?>
+                                        <?php echo $row['tag'] ?>
                                     </td>
                                     <td class="admin__section_item_td">
                                         <?php echo $row['date'] ?>
