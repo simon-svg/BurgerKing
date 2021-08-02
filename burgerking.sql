@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Время создания: Июл 31 2021 г., 10:26
--- Версия сервера: 10.4.19-MariaDB
--- Версия PHP: 7.4.20
+-- Хост: 127.0.0.1:3306
+-- Время создания: Авг 02 2021 г., 14:25
+-- Версия сервера: 10.3.13-MariaDB
+-- Версия PHP: 7.1.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -340,7 +341,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `login`, `password`) VALUES
-(3, 'simon', 'karapetyan', 'simonkarapetyan605@gmail.com', 'simon', '$2y$10$.x1dN.TWVizO6Rxg2xxa9u0k0G5G06eolBnT2WXvUhTzy210XWiCO');
+(6, 'simon', 'karapetyan', 'simonkarapetyan605@gmail.com', 'simon-svg', '$2y$10$VX3tQe4/0dcYU7A8tWxV8.LaH1tjrI7Pv7dkD.FMx.XMsPUT/2XgW');
 
 --
 -- Индексы сохранённых таблиц
@@ -462,7 +463,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT для таблицы `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `food_blog`
@@ -504,7 +505,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
