@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_COOKIE['user'])) {
+    header("Location: registration.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,9 +110,11 @@
                 }
 
                 ?>
-                <form class="admin__form"
-                action="<?php if (isset($_GET['id'])) {echo './headerList/update.php';} else {echo './headerList/insert.php';} ?>"
-                method="POST">
+                <form class="admin__form" action="<?php if (isset($_GET['id'])) {
+                                                        echo './headerList/update.php';
+                                                    } else {
+                                                        echo './headerList/insert.php';
+                                                    } ?>" method="POST">
                     <div class="form__flex">
                         <input class="admin__inp admin__inp_header form-control" type="text" name="name" value="<?php echo $name ?>" placeholder="Name" required>
 
@@ -119,7 +128,7 @@
 
                             while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                            <?php }?>
+                            <?php } ?>
                         </select>
 
                         <input type="hidden" name="id" value="<?php echo $id; ?>">

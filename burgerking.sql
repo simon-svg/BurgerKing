@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Июл 28 2021 г., 18:34
--- Версия сервера: 10.1.21-MariaDB
--- Версия PHP: 7.1.1
+-- Время создания: Июл 31 2021 г., 10:26
+-- Версия сервера: 10.4.19-MariaDB
+-- Версия PHP: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -253,8 +254,7 @@ INSERT INTO `header_list` (`id`, `parent_id`, `name`, `link`) VALUES
 (5, 0, 'menu', 'menu.php'),
 (6, 0, 'booking', 'booking.php'),
 (11, 7, 'blog grid', 'blog.php'),
-(12, 7, 'blog detail', 'single.php'),
-(13, 0, 'contact', 'contact.php');
+(12, 0, 'contact', 'contact.php');
 
 -- --------------------------------------------------------
 
@@ -264,20 +264,18 @@ INSERT INTO `header_list` (`id`, `parent_id`, `name`, `link`) VALUES
 
 CREATE TABLE `home` (
   `id` int(16) NOT NULL,
-  `title1` varchar(256) NOT NULL,
-  `title2` varchar(256) NOT NULL,
-  `subtitle1` text NOT NULL,
-  `subtitle2` text NOT NULL,
-  `img1` varchar(128) NOT NULL,
-  `img2` varchar(128) NOT NULL
+  `title` varchar(256) NOT NULL,
+  `subtitle` text NOT NULL,
+  `img` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `home`
 --
 
-INSERT INTO `home` (`id`, `title1`, `title2`, `subtitle1`, `subtitle2`, `img1`, `img2`) VALUES
-(1, 'Best Quality Ingredients', 'Worlds Best Chefs', 'Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat at lectus in malesuada', 'Consequat at lectus in malesuada Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac', '35941721.jpeg', '94020349.jpeg');
+INSERT INTO `home` (`id`, `title`, `subtitle`, `img`) VALUES
+(1, 'Best Quality Ingredients', 'Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat at lectus in malesuada', '35941721.jpeg'),
+(2, 'Worlds Best Chefs', 'Consequat at lectus in malesuada Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac', '52891932.jpeg');
 
 -- --------------------------------------------------------
 
@@ -435,66 +433,80 @@ ALTER TABLE `users`
 --
 ALTER TABLE `all_foods`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT для таблицы `booking`
 --
 ALTER TABLE `booking`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT для таблицы `chefs`
 --
 ALTER TABLE `chefs`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
 --
 -- AUTO_INCREMENT для таблицы `clients`
 --
 ALTER TABLE `clients`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT для таблицы `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT для таблицы `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT для таблицы `food_blog`
 --
 ALTER TABLE `food_blog`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT для таблицы `food_categories`
 --
 ALTER TABLE `food_categories`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT для таблицы `header_list`
 --
 ALTER TABLE `header_list`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT для таблицы `home`
 --
 ALTER TABLE `home`
-  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT для таблицы `subscribe`
 --
 ALTER TABLE `subscribe`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT для таблицы `tags`
 --
 ALTER TABLE `tags`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

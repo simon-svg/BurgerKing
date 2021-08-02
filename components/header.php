@@ -1,3 +1,10 @@
+<?php
+require_once "php/db.php";
+
+$query = "SELECT * FROM header_list";
+$result = mysqli_query($mysqli, $query);
+?>
+
 <div class='navbar navbar-expand-lg bg-light navbar-light'>
     <div class='container-fluid'>
         <a href='index.php' class='navbar-brand'>Burger <span>King</span></a>
@@ -7,14 +14,9 @@
 
         <div class='collapse navbar-collapse justify-content-between' id='navbarCollapse'>
             <div class='navbar-nav ml-auto'>
-                <a href='index.php' class='nav-item nav-link <?php echo $headerArr[0]; ?>'>Home</a>
-                <a href='about.php' class='nav-item nav-link <?php echo $headerArr[1]; ?>'>About</a>
-                <a href='feature.php' class='nav-item nav-link <?php echo $headerArr[2]; ?>'>Feature</a>
-                <a href='team.php' class='nav-item nav-link <?php echo $headerArr[3]; ?>'>Chef</a>
-                <a href='menu.php' class='nav-item nav-link <?php echo $headerArr[4]; ?>'>Menu</a>
-                <a href='booking.php' class='nav-item nav-link <?php echo $headerArr[5]; ?>'>Booking</a>
-                <a href='blog.php' class='nav-item nav-link <?php echo $headerArr[6]; ?>'>Blog Grid</a>
-                <a href='contact.php' class='nav-item nav-link <?php echo $headerArr[7]; ?>'>Contact</a>
+                <?php $i = 0; while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <a href="<?php echo $row['link'] ?>" class='nav-item nav-link <?php echo $headerArr[$i]; ?>'><?php echo $row['name'] ?></a>
+                <?php $i++; } ?>
             </div>
         </div>
     </div>

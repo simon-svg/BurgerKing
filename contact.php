@@ -101,22 +101,18 @@
                 </div>
                 <div class="col-md-6">
                     <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form action="./php/contact.php" method="POST" id="contactForm" name="sentMessage">
                         <div class="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                            <p class="help-block text-danger"></p>
+                            <input type="text" class="form-control" id="name" placeholder="Your Name" required name="name" />
                         </div>
                         <div class="control-group">
-                            <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                            <p class="help-block text-danger"></p>
+                            <input type="email" class="form-control" id="email" placeholder="Your Email" required name="email" />
                         </div>
                         <div class="control-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                            <p class="help-block text-danger"></p>
+                            <input type="text" class="form-control" id="subject" placeholder="Subject" required name="subject" />
                         </div>
                         <div class="control-group">
-                            <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                            <p class="help-block text-danger"></p>
+                            <textarea class="form-control" id="message" placeholder="Message" required name="message"></textarea>
                         </div>
                         <div>
                             <button class="btn custom-btn" type="submit" id="sendMessageButton">Send Message</button>

@@ -2,12 +2,9 @@
 
 require_once "../../db.php";
 
-$title1 = $_POST["title1"];
-$title2 = $_POST["title2"];
-$subtitle1 = $_POST["subtitle1"];
-$subtitle2 = $_POST["subtitle2"];
-$img1 = [];
-$img2 = [];
+$title = $_POST["title"];
+$subtitle = $_POST["subtitle"];
+$img = $_POST["img"];
 
 foreach ($_FILES as $key => $file) {
 	if ($file["error"] == 0) {
@@ -17,14 +14,14 @@ foreach ($_FILES as $key => $file) {
 			$y = mt_rand(1000000, 99999999);
 			$y .= '.' . $x;
 			if (move_uploaded_file($file["tmp_name"], "../../../img/home/" . $y)) {
-				$$key = $y;
+				$img = $y;
 			}
 		}
 	}
 }
 
-$query = "INSERT INTO home (title1, title2, subtitle1, subtitle2, img1, img2)
-VALUES ('$title1', '$title2', '$subtitle1', '$subtitle2', '$img1', '$img2')";
+$query = "INSERT INTO home (title, subtitle, img)
+VALUES ('$title', '$subtitle', '$img')";
 
 $result = mysqli_query($mysqli, $query);
 

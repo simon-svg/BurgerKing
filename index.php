@@ -34,39 +34,29 @@
 
     $query = "SELECT * FROM home";
     $result = mysqli_query($mysqli, $query);
-    $row = mysqli_fetch_assoc($result);
     ?>
 
     <!-- Carousel Start -->
     <div class="carousel">
         <div class="container-fluid">
             <div class="owl-carousel">
-                <div class="carousel-item">
-                    <div class="carousel-img">
-                        <img src="img/home/<?php echo $row['img1']; ?>" alt="<?php echo $row['img1']; ?>">
-                    </div>
-                    <div class="carousel-text">
-                        <h1><?php echo $row['title1']; ?></h1>
-                        <p><?php echo $row['subtitle1']; ?></p>
-                        <div class="carousel-btn">
-                            <a class="btn custom-btn" href="menu.php">View Menu</a>
-                            <a class="btn custom-btn" href="booking.php">Book Table</a>
+                <?php
+                while($row = mysqli_fetch_assoc($result)){
+                ?>
+                    <div class="carousel-item">
+                        <div class="carousel-img">
+                            <img src="img/home/<?php echo $row['img']; ?>" alt="<?php echo $row['img']; ?>">
+                        </div>
+                        <div class="carousel-text">
+                            <h1><?php echo $row['title']; ?></h1>
+                            <p><?php echo $row['subtitle']; ?></p>
+                            <div class="carousel-btn">
+                                <a class="btn custom-btn" href="menu.php">View Menu</a>
+                                <a class="btn custom-btn" href="booking.php">Book Table</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="carousel-img">
-                        <img src="img/home/<?php echo $row['img2']; ?>" alt="<?php echo $row['img2']; ?>">
-                    </div>
-                    <div class="carousel-text">
-                        <h1><?php echo $row['title2']; ?></h1>
-                        <p><?php echo $row['subtitle2']; ?></p>
-                        <div class="carousel-btn">
-                            <a class="btn custom-btn" href="menu.php">View Menu</a>
-                            <a class="btn custom-btn" href="booking.php">Book Table</a>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
         <!-- Carousel End -->

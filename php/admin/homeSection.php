@@ -46,12 +46,9 @@
                 <div class="admin__chefs">
                     <table class="admin__table">
                         <tr>
-                            <th class="admin__table_title">title1</th>
-                            <th class="admin__table_title">title2</th>
-                            <th class="admin__table_title">subtitle1</th>
-                            <th class="admin__table_title">subtitle2</th>
-                            <th class="admin__table_title">img1</th>
-                            <th class="admin__table_title">img2</th>
+                            <th class="admin__table_title">title</th>
+                            <th class="admin__table_title">subtitle</th>
+                            <th class="admin__table_title">img</th>
                             <th class="admin__table_title">panel</th>
                         </tr>
                         <?php
@@ -62,30 +59,22 @@
                         ?>
                             <tr class="admin__section_item">
                                 <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['title1'] ?></h3>
+                                    <h3 class="admin__section_item_name"><?php echo $row['title'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['title2'] ?></h3>
-                                </td>
-                                <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['subtitle1'] ?></h3>
-                                </td>
-                                <td class="admin__section_item_td">
-                                    <h3 class="admin__section_item_name"><?php echo $row['subtitle2'] ?></h3>
+                                    <h3 class="admin__section_item_name"><?php echo $row['subtitle'] ?></h3>
                                 </td>
                                 <td class="admin__section_item_td">
                                     <div class="admin__section_img">
-                                        <img src="../../img/home/<?php echo $row['img1'] ?>" alt="bg">
-                                    </div>
-                                </td>
-                                <td class="admin__section_item_td">
-                                    <div class="admin__section_img">
-                                        <img src="../../img/home/<?php echo $row['img2'] ?>" alt="bg">
+                                        <img src="../../img/home/<?php echo $row['img'] ?>" alt="bg">
                                     </div>
                                 </td>
                                 <td class="admin__section_item_td">
                                     <a href="?id=<?php echo $row["id"] ?>">
                                         <i class="example__class admin__icon fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="./home/remove.php?id=<?php echo $row["id"] ?>">
+                                        <i class="admin__icon fas fa-times"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -96,12 +85,9 @@
                 <?php
 
                 $id = '';
-                $title1 = '';
-                $title2 = '';
-                $subtitle1 = '';
-                $subtitle2 = '';
-                $img1 = '';
-                $img2 = '';
+                $title = '';
+                $subtitle = '';
+                $img = '';
 
                 if (isset($_GET["id"])) {
                     $query = 'SELECT * FROM home WHERE id = ' . $_GET["id"];
@@ -109,12 +95,9 @@
 
                     $row = mysqli_fetch_assoc($result);
                     $id = $row["id"];
-                    $title1 = $row["title1"];
-                    $title2 = $row["title2"];
-                    $subtitle1 = $row["subtitle1"];
-                    $subtitle2 = $row["subtitle2"];
-                    $img1 = $row["img1"];
-                    $img2 = $row["img2"];
+                    $title = $row["title"];
+                    $subtitle = $row["subtitle"];
+                    $img = $row["img"];
                 }
 
                 ?>
@@ -124,24 +107,15 @@
                                                         echo './home/insert.php';
                                                     } ?>" method="POST" enctype="multipart/form-data">
                     <div class="form__flex">
-                        <input class="admin__inp form-control" type="text" name="title1" value="<?php echo $title1; ?>" placeholder="Title1" required>
+                        <input class="admin__inp form-control" type="text" name="title" value="<?php echo $title; ?>" placeholder="Title" required>
 
-                        <input class="admin__inp form-control" type="text" name="title2" value="<?php echo $title2; ?>" placeholder="Title2" required>
+                        <input class="admin__inp form-control" type="text" name="subtitle" value="<?php echo $subtitle ?>" placeholder="Subtitle" required>
 
-                        <input class="admin__inp form-control" type="text" name="subtitle1" value="<?php echo $subtitle1 ?>" placeholder="Subtitle1" required>
-
-                        <input class="admin__inp form-control" type="text" name="subtitle2" value="<?php echo $subtitle2 ?>" placeholder="Subtitle2" required>
-
-                        <input class="admin__inp form-control" type="file" name="img1" <?php if (!isset($_GET['id'])) {
+                        <input class="admin__inp form-control" type="file" name="img" <?php if (!isset($_GET['id'])) {
                                                                                             echo 'required';
                                                                                         } ?>>
 
-                        <input class="admin__inp form-control" type="file" name="img2" <?php if (!isset($_GET['id'])) {
-                                                                                            echo 'required';
-                                                                                        } ?>>
-
-                        <input type="hidden" name="img1" value="<?php echo $img1 ?>">
-                        <input type="hidden" name="img2" value="<?php echo $img2 ?>">
+                        <input type="hidden" name="img" value="<?php echo $img ?>">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                     <div>

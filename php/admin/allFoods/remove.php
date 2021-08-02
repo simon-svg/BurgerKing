@@ -2,7 +2,7 @@
 
 require_once "../../db.php";
 
-$id = $_POST["id"];
+$id = $_GET["id"];
 
 $query = "DELETE FROM all_foods WHERE id='$id'";
 $result = mysqli_query($mysqli, $query);
